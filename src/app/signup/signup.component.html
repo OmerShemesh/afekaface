@@ -1,0 +1,24 @@
+<div class="container">
+  <form class="form" role="form" id="signup-nav" #signUpForm="ngForm" (ngSubmit)="signup()">
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="user.name" name="name" placeholder="First & Last Name" required>
+    </div>
+    <div class="form-group">
+      <input type="email" class="form-control" [(ngModel)]="user.email" name="email"  placeholder="Email address" required>
+    </div>
+    <div class="form-group ">
+      <input type="password " class="form-control " [(ngModel)]="user.password" name="password " placeholder="Password " required>
+    </div>
+    <!--<div class="form-group ">
+      <input type="file " class="form-control " name="exampleInputPassword2 "  required>
+    </div>-->
+    <div class="form-group ">
+      <button type="submit " class="btn btn-primary btn-block ">Sign up</button>
+    </div>
+  </form>
+
+  <div *ngIf="error" class="alert alert-danger fade in">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong>{{error}}</strong>
+  </div>
+</div>
