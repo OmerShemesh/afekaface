@@ -24,7 +24,7 @@
             </div>
           </form>
           <ul  class="nav navbar-nav navbar-right">
-            <li *ngIf="!auth" class="dropdown">
+            <li *ngIf="!hasAuth()" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>LogIn</b> <span class="caret"></span></a>
           <ul id="login-dp" class="dropdown-menu">
             <li>
@@ -36,7 +36,7 @@
             </li>
           </ul>
             </li>
-            <li *ngIf="auth"><a href="#" (click)="logout()">LogOut</a></li>
+            <li *ngIf="hasAuth()"><a href="#" (click)="logout()">LogOut</a></li>
           </ul>
           
         </div><!-- /.navbar-collapse -->

@@ -24,7 +24,7 @@ export class AppComponent extends Loading {
   
 
 
-  auth;
+  
   constructor(private _af:AngularFire,private _auth:AuthProvider) 
   {
     super(true);
@@ -36,16 +36,13 @@ export class AppComponent extends Loading {
 
   hasAuth()
   {
-    this.standby();
-    this.auth = this._auth.authenticated;
-    this.ready();
-   
+    this.loading = false;
+    return this._auth.authenticated;
+    
   }
  
   ngOnInit()
   {
-    this.hasAuth();
-    this.standby();
     this.hasAuth();
   }
 
