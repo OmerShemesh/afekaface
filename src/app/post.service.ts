@@ -13,8 +13,7 @@ export class PostService {
   
   getPosts(uid)
   {
-    this.currentUser = this._af.database.object(`users/${uid}`);
-    //this.currentUser.subscribe();
+    
 
     
   }

@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AuthProvider } from './auth/auth.service';
 import { LoadingComponent,Loading } from './loading/loading.component';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { ROUTER_DIRECTIVES,Router } from '@angular/router';
 
 
 
@@ -25,13 +25,14 @@ export class AppComponent extends Loading {
 
 
   
-  constructor(private _af:AngularFire,private _auth:AuthProvider) 
+  constructor(private _af:AngularFire,private _auth:AuthProvider,private router:Router) 
   {
     super(true);
   }
 
   logout(){
     this._auth.logout();
+    this.router.navigate(['/signup']);
   }
 
   hasAuth()

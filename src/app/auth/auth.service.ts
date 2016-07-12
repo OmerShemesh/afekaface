@@ -14,7 +14,7 @@ export class AuthProvider {
   }
   getUserId()
   {
-    return this.af.auth.getAuth().uid;
+     return this.authState.uid;
   }
   
   public get authenticated() : boolean {

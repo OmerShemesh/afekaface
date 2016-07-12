@@ -50,6 +50,7 @@ const barrels: string[] = [
   'app/loading-indicator',
   'app/loading',
   'app/notfound',
+  'app/posts',
   /** @cli-barrel */
 ];
 
