@@ -4,6 +4,7 @@ import { AppComponent, environment } from './app/';
 import { FIREBASE_PROVIDERS, defaultFirebase,AuthMethods, AuthProviders, firebaseAuthConfig } from 'angularfire2';
 import { disableDeprecatedForms,provideForms } from '@angular/forms';
 import { APP_ROUTER_PROVIDERS } from './app/app.routes'
+import { LoadingService } from './app/loading/loading.service';
 
 declare var firebase:any;
 
@@ -26,6 +27,7 @@ bootstrap(AppComponent,[
   }),
   disableDeprecatedForms(),
   provideForms(),
-  APP_ROUTER_PROVIDERS
+  APP_ROUTER_PROVIDERS,
+  LoadingService
 ]);
 

@@ -1,30 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingService } from './loading.service';
 
 @Component({
   moduleId: module.id,
   selector: 'loading-indicator',
   templateUrl: 'loading.component.html',
-  styleUrls: ['loading.component.css']
+  styleUrls: ['loading.component.css'],
+  providers:[LoadingService]
 })
-export class LoadingComponent implements OnInit {
+export class LoadingComponent {
 
-  constructor() {}
+   public active: boolean;
 
-  ngOnInit() {
+  public constructor(loading: LoadingService) {
+    loading.status.subscribe((status: boolean) => {
+      this.active = status;
+    });
   }
-
 }
 
 
-export class Loading{
-    public loading: boolean;
-    constructor(val: boolean) {
-        this.loading = val;
-    }
-    standby() {
-        this.loading = true;
-    }
-    ready() {
-        this.loading = false;
-    }
-}

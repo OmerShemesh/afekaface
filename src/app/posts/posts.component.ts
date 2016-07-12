@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingService } from '../loading/loading.service';
 
 @Component({
   moduleId: module.id,
   selector: 'app-posts',
   templateUrl: 'posts.component.html',
-  styleUrls: ['posts.component.css']
+  styleUrls: ['posts.component.css'],
+  providers:[LoadingService]
 })
 export class PostsComponent implements OnInit {
 
-  constructor() {}
+  constructor(private loading:LoadingService) {}
 
   ngOnInit() {
+    this.loading.stop();
   }
 
 }
