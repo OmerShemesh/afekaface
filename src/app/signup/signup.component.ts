@@ -9,7 +9,7 @@ import { LoadingService } from '../loading/loading.service';
   selector: 'app-signup',
   templateUrl: 'signup.component.html',
   styleUrls: ['signup.component.css'],
-  providers: [AuthProvider,LoadingService]
+  providers: [AuthProvider]
 })
 export class SignupComponent implements OnInit {
 
@@ -21,14 +21,14 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
+    
     this.auth.registerUser({email:this.user.email,password:this.user.password}).subscribe(registerData => {
-     this.loading.start();
-      
+       this.loading.start();
       this.auth.loginWithEmail(registerData).subscribe(loginData => {
+       
          this.af.database.object(`/users/${this.auth.getUserId()}`).set({name:this.user.name,email:this.user.email});
          
       }, loginError => {
-        this.user = { name: "", email: "", password: "" };
         setTimeout(() => {
           
           this.error = loginError;
@@ -46,11 +46,8 @@ export class SignupComponent implements OnInit {
 
 
   ngOnInit() {
-    this.loading.stop();
-  }
-
-  ngOnDestroy(){
     
   }
 
+ 
 }

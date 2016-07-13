@@ -6,7 +6,7 @@ import { LoadingService } from '../loading/loading.service';
   selector: 'app-posts',
   templateUrl: 'posts.component.html',
   styleUrls: ['posts.component.css'],
-  providers:[LoadingService]
+
 })
 export class PostsComponent implements OnInit {
 

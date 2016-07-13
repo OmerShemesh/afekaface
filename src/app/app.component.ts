@@ -5,10 +5,7 @@ import { SignupComponent } from './signup/signup.component';
 import { AuthProvider } from './auth/auth.service';
 import { LoadingComponent } from './loading/loading.component';
 import { ROUTER_DIRECTIVES,Router } from '@angular/router';
-
-
-
-
+import { LoadingService } from './loading/loading.service';
 
 
 @Component({
@@ -28,9 +25,9 @@ export class AppComponent  {
 
 
   
-  constructor(private _af:AngularFire,private _auth:AuthProvider,private router:Router) 
+  constructor(private _af:AngularFire,private _auth:AuthProvider,private router:Router,private loading:LoadingService) 
   {
-   
+    
   }
 
   logout()

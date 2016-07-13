@@ -6,15 +6,15 @@ import { LoadingService } from './loading.service';
   selector: 'loading-indicator',
   templateUrl: 'loading.component.html',
   styleUrls: ['loading.component.css'],
-  providers:[LoadingService]
 })
 export class LoadingComponent {
 
    public active: boolean;
 
-  public constructor(loading: LoadingService) {
-    loading.status.subscribe((status: boolean) => {
+   constructor(private loading: LoadingService) {
+    this.loading.status.subscribe((status: boolean) => {
       this.active = status;
+      console.log(status);
     });
   }
 }

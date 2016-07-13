@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { AuthProvider } from '../auth/auth.service';
 import { AngularFire } from 'angularfire2';
 import { NgForm }    from '@angular/common'
@@ -9,7 +9,7 @@ import { LoadingService } from '../loading/loading.service';
   selector: 'app-login',
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.css'],
-  providers:[AuthProvider,LoadingService]
+  providers:[AuthProvider]
 })
 export class LoginComponent implements OnInit {
   error:any;
@@ -21,13 +21,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+   
   }
-
  login() {  
     this._auth.loginWithEmail({email:this.email,password:this.password}).subscribe(data => {
+      this.loading.start();
       setTimeout(() => {
-        this.loading.start();
         this._route.navigate(['/user',this._auth.getUserId()])
       }, 1000);
     }, err => {

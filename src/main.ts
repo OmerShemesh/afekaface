@@ -6,7 +6,7 @@ import { disableDeprecatedForms,provideForms } from '@angular/forms';
 import { APP_ROUTER_PROVIDERS } from './app/app.routes'
 import { LoadingService } from './app/loading/loading.service';
 
-declare var firebase:any;
+
 
 
 if (environment.production) {
