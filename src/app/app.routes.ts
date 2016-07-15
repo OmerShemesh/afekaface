@@ -5,12 +5,15 @@ import { AuthGuard } from './auth/auth.guard';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { PostsComponent } from './posts/posts.component';
 import { AuthProvider } from './auth/auth.service';
+import { SearchComponent } from './search/search.component';
 
 export const routes: RouterConfig = [
-  {path:'',component:PostsComponent,canActivate:[AuthGuard]},
+ 
   { path: 'signup',component:SignupComponent},
   { path:'user/:id',component:PostsComponent,canActivate:[AuthGuard] },
+  { path:'',component:PostsComponent,canActivate:[AuthGuard]} ,
   { path: '**',component:NotfoundComponent},
+
   
 ];
 

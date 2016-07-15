@@ -6,6 +6,7 @@ import { AuthProvider } from './auth/auth.service';
 import { LoadingComponent } from './loading/loading.component';
 import { ROUTER_DIRECTIVES,Router } from '@angular/router';
 import { LoadingService } from './loading/loading.service';
+import { SearchComponent } from './search/search.component';
 
 
 @Component({
@@ -13,8 +14,8 @@ import { LoadingService } from './loading/loading.service';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-  directives:[LoginComponent,SignupComponent,LoadingComponent,ROUTER_DIRECTIVES],
-  providers:[AuthProvider]
+  directives:[LoginComponent,LoadingComponent,ROUTER_DIRECTIVES,SearchComponent],
+  providers:[]
   
 })
 
@@ -23,8 +24,7 @@ import { LoadingService } from './loading/loading.service';
 export class AppComponent  {
   
 
-
-  
+  numbers : any;
   constructor(private _af:AngularFire,private _auth:AuthProvider,private router:Router,private loading:LoadingService) 
   {
     

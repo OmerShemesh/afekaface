@@ -1,58 +1,49 @@
-
-
-
-      <nav class="navbar navbar-default navbar-inverse" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+<nav class="navbar navbar-default navbar-inverse" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">AfekaFace</a>
-        </div>
+      <a class="navbar-brand" href="/">AfekaFace</a>
+    </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          
-          <form *ngIf="hasAuth()" class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search For Friends">
-            </div>
-          </form>
-          <ul  class="nav navbar-nav navbar-right">
-            <li *ngIf="!hasAuth()" class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>LogIn</b> <span class="caret"></span></a>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li *ngIf="hasAuth()" class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search For Friends <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <app-search></app-search>
+          </ul>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="!hasAuth()" class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>LogIn</b> <span class="caret"></span></a>
           <ul id="login-dp" class="dropdown-menu">
             <li>
-              <div  class="row">
-                  <div class="col-md-12">
-                    <app-login></app-login>
-                  </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <app-login></app-login>
+                </div>
               </div>
             </li>
           </ul>
-            </li>
-            <li *ngIf="hasAuth()"><a (click)="logout()">LogOut</a></li>
-          </ul>
-          
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-    <div class="container">
-      <loading-indicator></loading-indicator>
-      <router-outlet></router-outlet>
+        </li>
+        <li *ngIf="hasAuth()"><a (click)="logout()">LogOut</a></li>
+      </ul>
+
     </div>
-
-
-
-
-  
-
-  
-
-
-
-
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+<div class="container">
+  <loading-indicator></loading-indicator>
+  <router-outlet></router-outlet>
+</div>

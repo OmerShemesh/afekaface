@@ -9,7 +9,7 @@ import { LoadingService } from '../loading/loading.service';
   selector: 'app-signup',
   templateUrl: 'signup.component.html',
   styleUrls: ['signup.component.css'],
-  providers: [AuthProvider]
+  providers: []
 })
 export class SignupComponent implements OnInit {
 

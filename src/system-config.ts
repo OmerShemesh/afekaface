@@ -51,6 +51,8 @@ const barrels: string[] = [
   'app/loading',
   'app/notfound',
   'app/posts',
+  'app/post',
+  'app/search',
   /** @cli-barrel */
 ];
 

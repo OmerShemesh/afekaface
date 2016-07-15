@@ -6,11 +6,18 @@ import {Observable} from "rxjs/Observable";
 export class AuthProvider {
   private authState: FirebaseAuthState = null;
 
+
   constructor(private af: AngularFire,public _auth:FirebaseAuth ) {
     _auth.subscribe((state:FirebaseAuthState)=>{
       this.authState = state;
     })
 
+  }
+
+  getUsers()
+  {
+    return this.af.database.list('/users');
+    
   }
   getUserId()
   {
