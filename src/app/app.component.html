@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li *ngIf="hasAuth()" class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search For Friends <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search For Friends <i class="fa fa-search"></i></a>
           <ul class="dropdown-menu" role="menu">
             <app-search></app-search>
           </ul>
@@ -24,7 +24,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="!hasAuth()" class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>LogIn</b> <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><i class="fa fa-user fa-2x" aria-hidden="true"></i></b> <span class="caret"></span></a>
           <ul id="login-dp" class="dropdown-menu">
             <li>
               <div class="row">
@@ -35,7 +35,7 @@
             </li>
           </ul>
         </li>
-        <li *ngIf="hasAuth()"><a (click)="logout()">LogOut</a></li>
+        <li *ngIf="hasAuth()"><a (click)="logout()"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a></li>
       </ul>
 
     </div>

@@ -32,8 +32,9 @@ export class AppComponent  {
 
   logout()
   {
-    this._auth.logout();
     this.router.navigate(['/signup']);
+    this._auth.logout();
+    
   }
 
   hasAuth()
