@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit,OnDestroy,EventEmitter,Output } from '@angular/core';
 import { AuthProvider } from '../auth/auth.service';
 import { AngularFire } from 'angularfire2';
 import { NgForm }    from '@angular/common'
@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   error:any;
   email:string;
   password:string;
+
   constructor(private _auth:AuthProvider,private af:AngularFire,private _route:Router,private loading:LoadingService) {
     this.email = "";
     this.password="";
@@ -26,8 +27,8 @@ export class LoginComponent implements OnInit {
  login() {  
     this._auth.loginWithEmail({email:this.email,password:this.password}).subscribe(data => {
       this.loading.start();
+      this._route.navigate(['/user',this._auth.getUserId()])
       setTimeout(() => {
-        this._route.navigate(['/user',this._auth.getUserId()])
       }, 1000);
     }, err => {
       setTimeout(() => {

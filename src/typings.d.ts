@@ -4,3 +4,6 @@
 
 
 declare var module: { id: string };
+
+
+declare var firebase:any;

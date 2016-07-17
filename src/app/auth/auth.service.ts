@@ -5,7 +5,7 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class AuthProvider {
   private authState: FirebaseAuthState = null;
-
+  
 
   constructor(private af: AngularFire,public _auth:FirebaseAuth ) {
     _auth.subscribe((state:FirebaseAuthState)=>{
@@ -14,11 +14,6 @@ export class AuthProvider {
 
   }
 
-  getUsers()
-  {
-    return this.af.database.list('/users');
-    
-  }
   getUserId()
   {
      return this.authState.uid;
@@ -28,17 +23,17 @@ export class AuthProvider {
     return this.authState !== null;
   }
   
-  getUserData() {
+  getUserData():Observable<any> {
     return Observable.create(observer => {
       this.af.auth.subscribe(authData => {
         if (authData) {
-          this.af.database.object("/users/" + authData.uid).subscribe(userData => {
-            console.log(userData);
+          this.af.database.object("users/" + authData.uid).subscribe(userData => {
             observer.next(userData);
           });
-        } else {
-          observer.error();
-        }
+        } 
+        // else {
+        //   observer.error();
+        // }
       });
     });
   }
@@ -85,5 +80,7 @@ export class AuthProvider {
 
   logout() {
     this.af.auth.logout();
+    
+    
   }
 }

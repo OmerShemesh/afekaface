@@ -1,7 +1,7 @@
-<div class="container">
-  <form #postForm="ngForm" class="form" (ngSubmit)="post()" >
+<div *ngIf="!loading.active" class="container">
+  <form #postForm="ngForm" class="form" (ngSubmit)="addPost()" >
     <div class="form-group">
-      <textarea type="text" [(ngModel)]="postText" class="form-control" name="email" placeholder="What's on your mind?" required></textarea>
+      <textarea type="text" name="postText" [(ngModel)]="postText" class="form-control" placeholder="What's on your mind?" required></textarea>
     </div>
     <div class="form-group">
       <label for="check">Private Post?</label>
@@ -14,6 +14,7 @@
 
   <ul>
     <li *ngFor="let post of myPosts | async">
+      <p>writter by user: {{post.name}}</p>
       <p>{{post.text}}</p>
       <p>{{post.date | date: 'dd/MM/yyyy'}}</p>
     </li>

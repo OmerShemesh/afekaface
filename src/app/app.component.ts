@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { AngularFire,AuthProviders,AuthMethods } from 'angularfire2';
+import { AngularFire,FirebaseObjectObservable } from 'angularfire2';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AuthProvider } from './auth/auth.service';
@@ -9,13 +9,15 @@ import { LoadingService } from './loading/loading.service';
 import { SearchComponent } from './search/search.component';
 
 
+
 @Component({
   moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
   directives:[LoginComponent,LoadingComponent,ROUTER_DIRECTIVES,SearchComponent],
-  providers:[]
+  providers:[],
+
   
 })
 
@@ -25,15 +27,18 @@ export class AppComponent  {
   
 
   numbers : any;
+  alert : string;
+  profile_pic;
   constructor(private _af:AngularFire,private _auth:AuthProvider,private router:Router,private loading:LoadingService) 
   {
-    
+        
   }
 
   logout()
   {
-    this.router.navigate(['/signup']);
     this._auth.logout();
+    this.router.navigate(['/signup']);
+    
     
   }
 
@@ -42,9 +47,18 @@ export class AppComponent  {
     return this._auth.authenticated;
   }
  
+  onAlert(msg:string){
+    this.alert = msg;
+  }
+  onLogin(pic)
+  {
+    this.profile_pic = pic;
+  }
   ngOnInit()
   {
-   
+    this._auth.getUserData().subscribe((userData)=>{
+      this.profile_pic = userData.profile_pic;
+    })
   }
  
 }

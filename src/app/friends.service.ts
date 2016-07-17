@@ -15,8 +15,8 @@ export class FriendsService {
         this.af.database.list(`users/${this.currentUser}/friends`).flatMap((friends) => friends).subscribe((friend)=>this.friendsList.push(friend));
     }   
     addFriend(friendId: string) {
-        this.af.database.object(`users/${this.currentUser}/friends/${friendId}`).set({isFriend:true});
-        this.af.database.object(`users/${friendId}/friends/${this.currentUser}`).set({isFriend:true});
+        this.af.database.object(`users/${this.currentUser}/friends/${friendId}`).set(true);
+        this.af.database.object(`users/${friendId}/friends/${this.currentUser}`).set(true);
     }
 
     removeFriend(friendId:string){

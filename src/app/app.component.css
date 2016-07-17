@@ -39,6 +39,32 @@
     color: #fff;
     background-color:#59b5fa;
 }
+.scrollable-menu {
+    height: auto;
+    max-height: 180px;
+    overflow-x: hidden;
+}
+.scrollable-menu::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 4px;        
+}    
+.scrollable-menu::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: lightgray;
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.75);        
+}
+.dropdown:hover .dropdown-menu {
+display: block;
+}
+.profile-img{
+    margin-right: 5px;
+    margin-top: 5px;
+    float: left;
+ /* 50% 50% centers image in div */
+    background-size: auto 100%; /* Interchange this value depending on prefering width vs. height */
+    width: 50px;
+    height: 50px;
+}
 @media(max-width:768px){
     #login-dp{
         background-color: inherit;

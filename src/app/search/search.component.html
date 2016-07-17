@@ -3,6 +3,7 @@
 <li class="divider"></li>
 <div *ngFor="let user of users | async | search:query:currentUser">
   <li>
+    <img *ngIf="user.profile_pic" class="profile-img img-rounded" [src]="user.profile_pic">
     <strong>{{user.name}}</strong>
     <button  *ngIf="!fService.contains(user.$key)" (click)="addFriend(user.$key)" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle" title="Add Friend"></i></button>
     <button  *ngIf="fService.contains(user.$key)" (click)="removeFriend(user.$key)" class="btn btn-danger btn-sm"><i class="fa fa-minus-circle" title="Remove Friend"></i></button>

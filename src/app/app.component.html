@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-inverse" role="navigation">
+<nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -16,20 +16,23 @@
       <ul class="nav navbar-nav">
         <li *ngIf="hasAuth()" class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search For Friends <i class="fa fa-search"></i></a>
-          <ul class="dropdown-menu" role="menu">
-            <app-search></app-search>
+          <ul class="dropdown-menu scrollable-menu" role="menu">
+            <app-search (alert)="onAlert($event)"></app-search>
           </ul>
         </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="hasAuth() && profile_pic" >
+            <img class="profile-img img-rounded" [src]="profile_pic">
+        </li>
         <li *ngIf="!hasAuth()" class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><i class="fa fa-user fa-2x" aria-hidden="true"></i></b> <span class="caret"></span></a>
           <ul id="login-dp" class="dropdown-menu">
             <li>
               <div class="row">
                 <div class="col-md-12">
-                  <app-login></app-login>
+                  <app-login (pic)="onLogin($event)"></app-login>
                 </div>
               </div>
             </li>
@@ -42,8 +45,14 @@
     <!-- /.navbar-collapse -->
   </div>
   <!-- /.container-fluid -->
+
 </nav>
 <div class="container">
   <loading-indicator></loading-indicator>
   <router-outlet></router-outlet>
+</div>
+
+<div *ngIf="alert" id="alert_box" style="position: fixed; top:0; left: 0" class="alert alert-info fade in">
+  <a href="#" class="close" data-dismiss="alert">&times;</a>
+  <strong>{{alert}}</strong>
 </div>

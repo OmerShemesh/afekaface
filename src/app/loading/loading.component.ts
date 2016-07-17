@@ -14,7 +14,7 @@ export class LoadingComponent {
    constructor(private loading: LoadingService) {
     this.loading.status.subscribe((status: boolean) => {
       this.active = status;
-      console.log(status);
+
     });
   }
 }
