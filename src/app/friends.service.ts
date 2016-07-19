@@ -8,9 +8,10 @@ export class FriendsService {
 
     currentUser: string;
     friendsList:Array<any>;
-
+    postFriends:Array<any>;
 	constructor(private af: AngularFire, private auth: AuthProvider) {
         this.friendsList = [];
+        this.postFriends = [];
         this.currentUser = this.auth.getUserId();
         this.af.database.list(`users/${this.currentUser}/friends`).flatMap((friends) => friends).subscribe((friend)=>this.friendsList.push(friend));
     }   
@@ -18,21 +19,19 @@ export class FriendsService {
         this.af.database.object(`users/${this.currentUser}/friends/${friendId}`).set(true);
         this.af.database.object(`users/${friendId}/friends/${this.currentUser}`).set(true);
     }
-
-    removeFriend(friendId:string){
-        var index = this.friendsList.map(function(item){return item.$key}).indexOf(friendId);
-        if(index!=-1)
-        {
-             this.friendsList.splice(index,1);
-        }
-        this.af.database.list(`users/${this.currentUser}/friends`).remove(friendId);
-        this.af.database.list(`users/${friendId}/friends`).remove(this.currentUser);   
-    }
     contains(id) {
         return this.friendsList.map(function(item){return item.$key}).indexOf(id) != -1;
  	}
     getFriends(){
         return this.friendsList;
     }
+    private _getPostFriends(postWriter){
+         this.af.database.list(`users/${postWriter}/friends`).flatMap((friends) => friends).subscribe((friend)=>this.postFriends.push(friend));
+    }
+    getPostFriends(postWriter){
+        this._getPostFriends(postWriter);
+        return this.postFriends;
+    }
+
    
 }

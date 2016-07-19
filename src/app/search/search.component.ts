@@ -32,11 +32,7 @@ export class SearchComponent implements OnInit {
     this.alert.emit("Added new friend!");
   }
   
-  removeFriend(friendId:string){
-    this.fService.removeFriend(friendId);
-    this.alert.emit("Removed Friend!");
 
-  }
   ngOnInit() {
     
   }

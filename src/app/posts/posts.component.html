@@ -11,8 +11,16 @@
                     <input id="pics" (change)="onFileSelect($event)" name="photos" type="file" multiple/>
                 </div>
                 <div class="form-group">
-                    <label for="check">Private Post?</label>
-                    <input [(ngModel)]="privatePost" name="check" type="checkbox" />
+                    <input [(ngModel)]="privatePost" type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                    <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
+                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                    <span> </span>
+                    </label>
+                    <label for="fancy-checkbox-primary" class="[ btn btn-default active ]">
+                        Private Post?
+                    </label>
+                    </div>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Post</button>
@@ -51,54 +59,7 @@
             <div class="post-description">
                 <p>{{post.text}}</p>
             </div>
-            <div class="post-footer">
-                <div class="input-group">
-                    <input class="form-control" placeholder="Add a comment" type="text">
-                    <span class="input-group-addon">
-                        <a href="#"><i class="fa fa-edit"></i></a>  
-                    </span>
-                </div>
-                <!--<ul class="comments-list">
-                    <li class="comment">
-                        <a class="pull-left" href="#">
-                            <img class="avatar" src="http://bootdey.com/img/Content/user_1.jpg" alt="avatar">
-                        </a>
-                        <div class="comment-body">
-                            <div class="comment-heading">
-                                <h4 class="user">Gavino Free</h4>
-                                <h5 class="time">5 minutes ago</h5>
-                            </div>
-                            <p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
-                        </div>
-                        <ul class="comments-list">
-                            <li class="comment">
-                                <a class="pull-left" href="#">
-                                    <img class="avatar" src="http://bootdey.com/img/Content/user_3.jpg" alt="avatar">
-                                </a>
-                                <div class="comment-body">
-                                    <div class="comment-heading">
-                                        <h4 class="user">Ryan Haywood</h4>
-                                        <h5 class="time">3 minutes ago</h5>
-                                    </div>
-                                    <p>Relax my friend</p>
-                                </div>
-                            </li> 
-                            <li class="comment">
-                                <a class="pull-left" href="#">
-                                    <img class="avatar" src="http://bootdey.com/img/Content/user_2.jpg" alt="avatar">
-                                </a>
-                                <div class="comment-body">
-                                    <div class="comment-heading">
-                                        <h4 class="user">Gavino Free</h4>
-                                        <h5 class="time">3 minutes ago</h5>
-                                    </div>
-                                    <p>Ok, cool.</p>
-                                </div>
-                            </li> 
-                        </ul>
-                    </li>
-                </ul>-->
-            </div>
+            <comment-list [post_id]="post.$key" [post_writer]="post.user_id"></comment-list> 
         </div>
     </div>
 

@@ -7,6 +7,7 @@ import { AuthProvider } from '../auth/auth.service';
 import { FriendsService } from '../friends.service';
 import { DateService } from '../date.service';
 import { StorageService } from '../storage.service';
+import { CommentsComponent } from '../comments/comments.component';
 
 
 @Component({
@@ -14,7 +15,8 @@ import { StorageService } from '../storage.service';
   selector: 'app-posts',
   templateUrl: 'posts.component.html',
   styleUrls: ['posts.component.css'],
-  providers: [PostsService, FriendsService, DateService,StorageService]
+  providers: [PostsService, FriendsService, DateService,StorageService],
+  directives:[CommentsComponent]
 
 })
 export class PostsComponent implements OnInit {
@@ -25,11 +27,12 @@ export class PostsComponent implements OnInit {
   error: any;
   pics: any;
   myPosts;
-  modalUrl = "";
+  modalUrl;
 
 
   constructor(private loading: LoadingService, private pService: PostsService, private route: ActivatedRoute, private auth: AuthProvider) {
     this.postText = "";
+    this.modalUrl = "";
     this.privatePost = false;
     this.pics = [];
     //this.myPosts = pService.getUserPosts(this.auth.getUserId());

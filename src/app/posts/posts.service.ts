@@ -31,24 +31,27 @@ export class PostsService {
             let post = { user_id: userId, name: name, text: postText, private: privatePost, date: this.dService.convertTimestamp(Date.now()), photos: urls };
             let key = this.af.database.list(`timeline/${userId}`).push(post).getKey();
             let friends = this.fService.getFriends();
-            this.af.database.object('/').update(this.fanoutPost(userId, friends, post,key ));
+            this.af.database.object('/').update(this.fanoutPost( friends, post,key ));
             this.loading.stop();
         }, 2000);
 
 
 
     }
-    fanoutPost(uid,friends,post,postId) {
+    fanoutPost(friends,post,postId) {
         let fanoutObject = {};
         friends.forEach(element => {
             fanoutObject[`timeline/${element.$key}/${postId}`] = post;
         });
         return fanoutObject;
     }
+
+
     getUserPosts(userId: string) {
         return this.af.database.list(`/timeline/${userId}`, {
             query: {
-                limitToLast: 8
+                limitToLast: 12,
+                
             }
         }).map((result) => { return result.reverse() });
     }
