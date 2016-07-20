@@ -81,6 +81,13 @@ export class PostsComponent implements OnInit {
     this.modalUrl = url;
   }
 
+  changePostPermissions(postId,userId,value){
+
+    this.pService.changePostPermissions(postId,userId,value);
+
+
+  }
+
   ngOnInit() {
 
   }

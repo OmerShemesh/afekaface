@@ -50,8 +50,7 @@ export class PostsService {
     getUserPosts(userId: string) {
         return this.af.database.list(`/timeline/${userId}`, {
             query: {
-                limitToLast: 12,
-                
+                limitToLast: 12,    
             }
         }).map((result) => { return result.reverse() });
     }
@@ -70,6 +69,24 @@ export class PostsService {
         })
         return profilepic;
     }
+     changePostPermissions(postId,userId,value){
+         let friends = this.fService.getFriends();
+         this.af.database.object(`/timeline/${userId}/${postId}`).update({private:value});
+         friends.forEach(element => {
+              this.af.database.object(`timeline/${element.$key}/${postId}`).update({private:value});
+         });
+     }
+    // fanoutPermissions(friends,postId,userId,value)
+    // {
+    //     let fanoutObject = {};
+    //     post.private = value;
+    //     fanoutObject[`timeline/${userId}/${postId}`] = post;
+    //     friends.forEach(element => {
+    //         fanoutObject[`timeline/${element.$key}/${postId}`] = post;
+    //     });
+    //     return fanoutObject;
+
+    // }
 
 
 

@@ -150,3 +150,9 @@
 .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
     display: none;   
 }
+
+.inline-div{
+  margin-top:1px; 
+  margin-right:1px;
+  display:inline-block;
+}
