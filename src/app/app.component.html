@@ -23,6 +23,10 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="hasAuth()">
+          <img [src]="profile_pic" class="img-circle avatar">
+        </li>
+
         <li *ngIf="!hasAuth()" class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><i class="fa fa-user fa-2x" aria-hidden="true"></i></b> <span class="caret"></span></a>
           <ul id="login-dp" class="dropdown-menu">
