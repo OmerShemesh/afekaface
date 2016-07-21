@@ -7,16 +7,20 @@ import { LoadingService } from './loading.service';
   templateUrl: 'loading.component.html',
   styleUrls: ['loading.component.css'],
 })
-export class LoadingComponent {
+export class LoadingComponent implements OnInit {
 
    public active: boolean;
 
    constructor(private loading: LoadingService) {
-    this.loading.status.subscribe((status: boolean) => {
+    
+    
+  }
+  ngOnInit(){
+      this.loading.status.subscribe((status: boolean) => {
       this.active = status;
 
     });
-  }
+    }
 }
 
 

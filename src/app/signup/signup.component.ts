@@ -19,7 +19,7 @@ export class SignupComponent implements OnInit {
   profilePic;
 
   constructor(private auth: AuthProvider, private af: AngularFire, private router: Router, private loading: LoadingService, private sr: StorageService) {
-    this.user = { name: "", email: "", password: "" };
+    
   }
 
   signup() {
@@ -69,7 +69,7 @@ export class SignupComponent implements OnInit {
 
 
   ngOnInit() {
-
+    this.user = { name: "", email: "", password: "" };
   }
 
 

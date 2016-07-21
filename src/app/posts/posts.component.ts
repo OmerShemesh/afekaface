@@ -31,17 +31,7 @@ export class PostsComponent implements OnInit {
 
 
   constructor(private loading: LoadingService, private pService: PostsService, private route: ActivatedRoute, private auth: AuthProvider) {
-    this.postText = "";
-    this.modalUrl = "";
-    this.privatePost = false;
-    this.pics = [];
-    //this.myPosts = pService.getUserPosts(this.auth.getUserId());
-    this.loading.start();
-    this.auth.getUserData().subscribe((user) => this.currentUserName = user.name);
-    this.myPosts = this.pService.getUserPosts(this.auth.getUserId());
-    setTimeout(() => {
-      this.loading.stop();
-    }, 1500);
+   
 
 
 
@@ -89,7 +79,17 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit() {
-
+     this.postText = "";
+    this.modalUrl = "";
+    this.privatePost = false;
+    this.pics = [];
+    //this.myPosts = pService.getUserPosts(this.auth.getUserId());
+    this.loading.start();
+    this.auth.getUserData().subscribe((user) => this.currentUserName = user.name);
+    this.myPosts = this.pService.getUserPosts(this.auth.getUserId());
+    setTimeout(() => {
+      this.loading.stop();
+    }, 1500);
   }
 
 

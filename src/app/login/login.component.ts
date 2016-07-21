@@ -15,26 +15,31 @@ export class LoginComponent implements OnInit {
   error:any;
   email:string;
   password:string;
+  loginVar;
 
   constructor(private _auth:AuthProvider,private af:AngularFire,private _route:Router,private loading:LoadingService) {
-    this.email = "";
-    this.password="";
+    
   }
 
   ngOnInit() {
-   
+   this.email = "";
+    this.password="";
   }
  login() {  
-    this._auth.loginWithEmail({email:this.email,password:this.password}).subscribe(data => {
+   this.loginVar =  this._auth.loginWithEmail({email:this.email,password:this.password});
+   this.loginVar.subscribe(data => {
       this.loading.start();
       this._route.navigate(['/user',this._auth.getUserId()])
-      setTimeout(() => {
-      }, 1000);
+      
     }, err => {
       setTimeout(() => {
         this.error = err;
       }, 1000);
     });
+ }
+
+ ngOnDesroy(){
+   this.loginVar.unsubscribe()
  }
 
 } 

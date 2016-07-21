@@ -39,26 +39,12 @@ export class AuthProvider {
   }
 
   registerUser(credentials: any) {
-    return Observable.create(observer => {
-      this.af.auth.createUser(credentials).then((authData) => {
+   return Observable.create(observer => {
+      this.af.auth.createUser(credentials).then(authData => {
         credentials.created = true;
         observer.next(credentials);
-      }).catch((error) => {
-        if (error) {
-          switch (error.code) {
-            case "INVALID_EMAIL":
-              observer.error("Invalid email.");
-              break;
-            case "EMAIL_TAKEN":
-              observer.error("The specified email address is already in use.");
-              break;
-            case "NETWORK_ERROR":
-              observer.error("An error occurred while attempting to contact the authentication server.");
-              break;
-            default:
-              observer.error(error);
-          }
-        }
+      }).catch(error => {
+        observer.error(error);
       });
     });
   }
@@ -80,6 +66,7 @@ export class AuthProvider {
 
   logout() {
     this.af.auth.logout();
+    //this.af.auth.unsubscribe();
     
     
   }

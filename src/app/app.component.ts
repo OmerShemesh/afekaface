@@ -56,9 +56,9 @@ export class AppComponent  {
   }
   ngOnInit()
   {
-    this._auth.getUserData().subscribe((userData)=>{
-      this.profile_pic = userData.profile_pic;
-    })
+    // this._auth.getUserData().subscribe((userData)=>{
+    //   this.profile_pic = userData.profile_pic;
+    // })
   }
  
 }

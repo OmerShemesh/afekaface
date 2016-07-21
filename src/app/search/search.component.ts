@@ -22,9 +22,7 @@ export class SearchComponent implements OnInit {
   @Output() alert = new EventEmitter();
 
   constructor(private af:AngularFire,private auth: AuthProvider, private fService: FriendsService) {
-    this.query = "";
-    this.users = af.database.list('/users');
-    this.currentUser = auth.getUserId();
+    
   }
 
   addFriend(friendId:string) {
@@ -34,7 +32,9 @@ export class SearchComponent implements OnInit {
   
 
   ngOnInit() {
-    
+    this.query = "";
+    this.users = this.af.database.list('/users');
+    this.currentUser = this.auth.getUserId();
   }
 
 }

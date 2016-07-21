@@ -23,7 +23,8 @@ bootstrap(AppComponent,[
   }),
   firebaseAuthConfig({
     provider:AuthProviders.Password,
-    method:AuthMethods.Password
+    method:AuthMethods.Password,
+    remember:"none"
   }),
   disableDeprecatedForms(),
   provideForms(),
