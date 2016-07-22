@@ -41,7 +41,10 @@ export class PostsComponent implements OnInit {
     this.postText = "";
     this.pics = [];
   }
-
+  removePost(postId)
+  {
+    this.pService.removePost(postId,this.auth.getUserId());
+  }
   onFileSelect(e: any) {
     let elem = <HTMLInputElement>document.getElementById("pics");
     let ok = true;

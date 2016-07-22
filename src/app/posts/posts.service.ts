@@ -10,7 +10,7 @@ import { StorageService } from '../storage.service';
 export class PostsService {
     friends: Array<any>;
     constructor(private af: AngularFire, private fService: FriendsService, private loading: LoadingService, private dService: DateService, private sr: StorageService) {
-        this.friends = fService.getFriends();
+        //this.friends = fService.getFriends();
 
     }
 
@@ -38,6 +38,22 @@ export class PostsService {
 
 
     }
+
+    removePost(postId,userId){
+        let friends = this.fService.getFriends();
+         this.af.database.object('/').update(this.fanoutRemovePosts(userId,friends,postId));
+    }
+
+    fanoutRemovePosts(userId,friends,postId)
+    {
+        let fanoutObject = {};
+        fanoutObject[`timeline/${userId}/${postId}`] = null;
+         friends.forEach(element => {
+            fanoutObject[`timeline/${element.$key}/${postId}`] = null;
+        });
+        return fanoutObject;
+    }
+
     fanoutPost(friends,post,postId) {
         let fanoutObject = {};
         friends.forEach(element => {
