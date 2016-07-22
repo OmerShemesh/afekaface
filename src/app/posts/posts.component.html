@@ -44,7 +44,7 @@
         <div *ngFor="let post of myPosts | async">
             <div *ngIf="(post.private && post.user_id == auth.getUserId()) || (!post.private) " class="panel panel-white post panel-shadow">
                 <div *ngIf="post.user_id == auth.getUserId()" style="margin-right:3px" class="pull-right">
-                    <a href="#" (click)="removePost(post.$key)" alt="Remove Post"><i class="fa fa-trash fa-2x"></i></a>
+                    <a href="#" (click)="removePost(post.$key)" title="Remove Post"><i class="fa fa-trash fa-2x"></i></a>
                 </div>
                 <div class="post-heading">
 
