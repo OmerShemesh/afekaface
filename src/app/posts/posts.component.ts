@@ -72,7 +72,7 @@ export class PostsComponent implements OnInit {
   }
 
   changePostPermissions(postId,userId,value){
-
+    console.log('clicked on checkbox!');
     this.pService.changePostPermissions(postId,userId,value);
 
 
