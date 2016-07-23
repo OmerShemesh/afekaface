@@ -36,5 +36,8 @@ export class CommentsComponent implements OnInit {
       this.commentText = "";
       this.auth.getUserData().subscribe((user) => this.currentUserName = user.name);
   }
-
+  removeComment(commentId)
+  {
+    this.cService.removeComment(this.auth.getUserId(),this.post_id,commentId);
+  }
 }

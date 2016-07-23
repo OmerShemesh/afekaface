@@ -30,6 +30,18 @@ export class CommentsService {
         return fanoutObject;
 
     }
+    removeComment(userId,postId,commentId){
+        let friends = this.fService.getPostFriends(userId);
+        this.af.database.object('/').update(this.fanoutRemoveComment(postId,commentId,userId,friends));
+    }
+    fanoutRemoveComment(postId,commentId,userId,friends){
+        let fanoutObject = {};
+        fanoutObject[`/timeline/${userId}/${postId}/comments/${commentId}`] = null;
+        friends.forEach(element => {
+           fanoutObject[`/timeline/${element.$key}/${postId}/comments/${commentId}`] = null;
+        });
+        return fanoutObject;
+    }
     getUserProfilePic(userId) {
         let profilepic = "";
         this.af.database.object(`users/${userId}`).subscribe((userData) => {

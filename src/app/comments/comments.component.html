@@ -1,7 +1,7 @@
 <div class="post-footer">
 
   <div class="input-group">
-    <input  [(ngModel)]="commentText" class="form-control" placeholder="Add a comment" type="text" required>
+    <input [(ngModel)]="commentText" class="form-control" placeholder="Add a comment" type="text" required>
     <span class="input-group-addon">
                         <a (click)="addComment()"><i class="fa fa-edit"></i></a>  
                     </span>
@@ -16,8 +16,12 @@
         <div class="comment-heading">
           <h4 class="user">{{comment.name}}</h4>
           <h5 class="time">{{comment.date}}</h5>
+          <div *ngIf="auth.getUserId()==comment.user_id" style="margin-right:3px" class="pull-right">
+            <a href="javascript:;" (click)="removeComment(comment.$key)" title="Remove Comment"><i class="fa fa-trash fa-2x"></i></a>
+          </div>
         </div>
         <p>{{comment.text}}</p>
+        
       </div>
     </li>
   </ul>
