@@ -66,7 +66,7 @@ export class AuthProvider {
 
   logout() {
     this.af.auth.logout();
-    //this.af.auth.unsubscribe();
+  
     
     
   }

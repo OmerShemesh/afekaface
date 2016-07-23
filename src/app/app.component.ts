@@ -29,14 +29,14 @@ export class AppComponent  {
   numbers : any;
   alert : string;
   profile_pic;
-  constructor(private _af:AngularFire,private _auth:AuthProvider,private router:Router,private loading:LoadingService) 
+  constructor(private _af:AngularFire,private auth:AuthProvider,private router:Router,private loading:LoadingService) 
   {
         
   }
 
   logout()
   {
-    this._auth.logout();
+    this.auth.logout();
     this.router.navigate(['/signup']);
     
     
@@ -44,7 +44,7 @@ export class AppComponent  {
 
   hasAuth()
   {
-    return this._auth.authenticated;
+    return this.auth.authenticated;
   }
  
   onAlert(msg:string){
@@ -56,7 +56,7 @@ export class AppComponent  {
   }
   ngOnInit()
   {
-    this._auth.getUserData().subscribe((userData)=>{
+    this.auth.getUserData().subscribe((userData)=>{
       this.profile_pic = userData.profile_pic;
     })
   }
