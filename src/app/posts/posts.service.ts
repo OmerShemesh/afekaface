@@ -15,46 +15,55 @@ export class PostsService {
     }
 
     addPost(userId: string, name: string, postText: string, privatePost: boolean, pics) {
-        
+
         this.loading.start();
         let urls = [];
-        if(pics != [])
-        {
-           
+
+        if (pics.length > 0) {
+
             this.sr.uploadPostPics(pics, userId).subscribe((data: any) => {
                 urls.push(data.snapshot.downloadURL);
+                if (pics.length == urls.length) {
+                    let post = { user_id: userId, name: name, text: postText, private: privatePost, date: this.dService.convertTimestamp(Date.now()), photos: urls };
+                    let key = this.af.database.list(`timeline/${userId}`).push(post).getKey();
+                    let friends = this.fService.getFriends();
+                    this.af.database.object('/').update(this.fanoutPost(friends, post, key));
+                    this.loading.stop();
+                }
             })
         }
-       
+        else {
+            setTimeout(() => {
+                let post = { user_id: userId, name: name, text: postText, private: privatePost, date: this.dService.convertTimestamp(Date.now()) };
+                let key = this.af.database.list(`timeline/${userId}`).push(post).getKey();
+                let friends = this.fService.getFriends();
+                this.af.database.object('/').update(this.fanoutPost(friends, post, key));
+                this.loading.stop();
+            }, 2000)
 
-        setTimeout(() => {
-            let post = { user_id: userId, name: name, text: postText, private: privatePost, date: this.dService.convertTimestamp(Date.now()), photos: urls };
-            let key = this.af.database.list(`timeline/${userId}`).push(post).getKey();
-            let friends = this.fService.getFriends();
-            this.af.database.object('/').update(this.fanoutPost( friends, post,key ));
-            this.loading.stop();
-        }, 2000);
+        }
+
+
 
 
 
     }
 
-    removePost(postId,userId){
+    removePost(postId, userId) {
         let friends = this.fService.getFriends();
-         this.af.database.object('/').update(this.fanoutRemovePosts(userId,friends,postId));
+        this.af.database.object('/').update(this.fanoutRemovePosts(userId, friends, postId));
     }
 
-    fanoutRemovePosts(userId,friends,postId)
-    {
+    fanoutRemovePosts(userId, friends, postId) {
         let fanoutObject = {};
         fanoutObject[`timeline/${userId}/${postId}`] = null;
-         friends.forEach(element => {
+        friends.forEach(element => {
             fanoutObject[`timeline/${element.$key}/${postId}`] = null;
         });
         return fanoutObject;
     }
 
-    fanoutPost(friends,post,postId) {
+    fanoutPost(friends, post, postId) {
         let fanoutObject = {};
         friends.forEach(element => {
             fanoutObject[`timeline/${element.$key}/${postId}`] = post;
@@ -66,7 +75,7 @@ export class PostsService {
     getUserPosts(userId: string) {
         return this.af.database.list(`/timeline/${userId}`, {
             query: {
-                limitToLast: 12,    
+                limitToLast: 12,
             }
         }).map((result) => { return result.reverse() });
     }
@@ -85,13 +94,13 @@ export class PostsService {
         })
         return profilepic;
     }
-     changePostPermissions(postId,userId,value){
-         let friends = this.fService.getFriends();
-         this.af.database.object(`/timeline/${userId}/${postId}`).update({private:value});
-         friends.forEach(element => {
-              this.af.database.object(`timeline/${element.$key}/${postId}`).update({private:value});
-         });
-     }
+    changePostPermissions(postId, userId, value) {
+        let friends = this.fService.getFriends();
+        this.af.database.object(`/timeline/${userId}/${postId}`).update({ private: value });
+        friends.forEach(element => {
+            this.af.database.object(`timeline/${element.$key}/${postId}`).update({ private: value });
+        });
+    }
     // fanoutPermissions(friends,postId,userId,value)
     // {
     //     let fanoutObject = {};
