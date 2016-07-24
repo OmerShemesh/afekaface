@@ -40,7 +40,7 @@
 
 
 
-    <div  class="col-sm-10">
+    <div class="col-sm-10">
         <div *ngFor="let post of myPosts | async">
             <div *ngIf="(post.private && post.user_id == auth.getUserId()) || (!post.private) " class="panel panel-white post panel-shadow">
                 <div *ngIf="post.user_id == auth.getUserId()" style="margin-right:3px" class="pull-right">
@@ -63,12 +63,18 @@
                     <div class="pull-left meta">
                         <div class="title h5">
                             <b>{{post.name}}</b> made a post.
+                            <div style="display:inline-block">
+                                <a href="javascript:;" (click)="likePost(post.likes.liked,post.user_id,post.$key)"><i class="fa fa-thumbs-up"></i></a>
+                                <h6 class="text-muted time">{{post.likes.value}}</h6>
+                            </div>
+
                         </div>
                         <h6 class="text-muted time">at {{post.date}}</h6>
                         <div *ngIf="post.user_id == auth.getUserId()">
                             <label for="check">Private?</label>
                             <input name="check" #permission (change)="changePostPermissions(post.$key,post.user_id,permission.checked)" [ngModel]="post.private"
                                 type="checkbox">
+
                         </div>
                     </div>
                 </div>

@@ -45,6 +45,10 @@ export class PostsComponent implements OnInit {
   {
     this.pService.removePost(postId,this.auth.getUserId());
   }
+  likePost(liked,post_writer,postId){
+    if(!liked)
+      this.pService.likePost(postId,post_writer,this.auth.getUserId());
+  }
   onFileSelect(e: any) {
     let elem = <HTMLInputElement>document.getElementById("pics");
     let ok = true;

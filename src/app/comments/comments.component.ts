@@ -28,7 +28,7 @@ export class CommentsComponent implements OnInit {
     
    
     if(this.commentText != "")
-      this.cService.addComment(this.auth.getUserId(),this.currentUserName,this.commentText,this.post_id,this.post_writer);
+      this.cService.addComment(this.post_writer,this.currentUserName,this.commentText,this.post_id,this.post_writer);
   }
 
   ngOnInit() {
