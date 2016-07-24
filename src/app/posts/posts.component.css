@@ -16,7 +16,7 @@
 }
 
 .post .post-heading {
-  height: 95px;
+  height: 120px;
   padding: 20px 15px;
 }
 .post .post-heading .avatar {
@@ -35,7 +35,7 @@
   color: #aaaaaa;
 }
 .post .post-heading .meta .time {
-  margin-top: 8px;
+  margin-top: 0px;
   color: #999;
 }
 .post .post-image .image {

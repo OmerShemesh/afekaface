@@ -63,12 +63,9 @@
                     <div class="pull-left meta">
                         <div class="title h5">
                             <b>{{post.name}}</b> made a post.
-                            <div style="display:inline-block">
-                                <a href="javascript:;" (click)="likePost(post.likes.liked,post.user_id,post.$key)"><i class="fa fa-thumbs-up"></i></a>
-                                <h6 class="text-muted time">{{post.likes.value}}</h6>
-                            </div>
-
                         </div>
+                        <a style="display:inline-block" href="javascript:;" (click)="likePost(post.likes.liked,post.user_id,post.$key)"><i class="fa fa-thumbs-up"></i></a>
+                        <h6 style="display:inline-block" class="text-muted time">{{post.likes.value}}</h6>
                         <h6 class="text-muted time">at {{post.date}}</h6>
                         <div *ngIf="post.user_id == auth.getUserId()">
                             <label for="check">Private?</label>

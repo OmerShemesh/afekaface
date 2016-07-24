@@ -73,21 +73,22 @@ export class PostsService {
     
 
     getPostLikes(post_writer,postId){
-        let likes:number;
+        let likes:number = 0;
         this.af.database.object(`timeline/${post_writer}/${postId}/likes`).subscribe((val)=>{
             likes = val.value;
-        })
+        });
 
         return likes;
     }
     likePost(postId,post_writer,userId){
         let friends = this.fService.getPostFriends(post_writer);   
-        this.af.database.object('/').update(this.fanoutLike(postId,post_writer,userId,friends));
+        let likes:number = this.getPostLikes(userId,postId);
+        this.af.database.object(`timeline/${post_writer}/${postId}/likes/value`).set(likes+1);
+        this.af.database.object(`timeline/${userId}/${postId}/likes`).update({value:likes+1,liked:true});
+        this.af.database.object('/').update(this.fanoutLike(likes,postId,userId,friends));
     }
-    fanoutLike(postId,post_writer,userId,friends){
+    fanoutLike(likes,postId,userId,friends){
         let fanoutObject = {};
-        let likes:number = this.getPostLikes(post_writer,postId);
-        fanoutObject[`timeline/${userId}/${postId}/likes`] = {value:likes+1,liked:true};
         friends.forEach(element => {
               fanoutObject[`timeline/${element.$key}/${postId}/likes/value`] = likes+1;
         });
