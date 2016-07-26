@@ -1,4 +1,4 @@
-<div *ngIf="!loading.active" class="container">
+<div *ngIf="!loading.active" class="container col-sm-6">
   <form class="form" role="form" id="signup-nav" #signUpForm="ngForm" (ngSubmit)="signup()">
     <div class="form-group">
       <input type="text" class="form-control" [(ngModel)]="user.name" name="name" placeholder="First & Last Name" required>
