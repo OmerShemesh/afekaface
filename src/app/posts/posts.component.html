@@ -54,7 +54,7 @@
                         <img [src]="pService.getUserProfilePic(post.user_id)" class="img-circle avatar" alt="user profile image">
                     </div>
 
-                    <div class="pull-right meta cover-container">
+                    <div style="margin-right:20px; margin-top:10px" class="pull-right panel panel-info">
 
                         <img (click)="getModalUrl(pic)" data-toggle="modal" data-target=".pop-up" class="cover-item" *ngFor="let pic of post.photos"
                             [src]="pic">
@@ -71,7 +71,7 @@
                             <label for="check">Private?</label>
                             <input name="check" #permission (change)="changePostPermissions(post.$key,post.user_id,permission.checked)" [ngModel]="post.private"
                                 type="checkbox">
-
+                           
                         </div>
                     </div>
                 </div>

@@ -104,29 +104,6 @@
 }
 
 
-.cover-container
-{
-    height: 100px;
-    width: 50%;
-    white-space: nowrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-}
-
-.cover-item
-{
-    display: inline-block;
-    position: relative;
-    margin: 8px 8px;
-    box-shadow: 2px 2px 4px #bbb;
-    border-top-right-radius: 4px;
-    width: 50px;
-    height: 50px;
-    vertical-align: bottom;
-    background-position: top left;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
 
 
 .form-group input[type="checkbox"] {
