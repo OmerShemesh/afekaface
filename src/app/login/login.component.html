@@ -7,11 +7,11 @@
     <input type="email" class="form-control" [(ngModel)]="email" placeholder="Email address" name="email" required>
   </div>
   <div class="form-group">
-    <i class="fa fa-key" aria-hidden="true"></i>
+    <i class="fa fa-lock" aria-hidden="true"></i>
     <input type="password" class="form-control" [(ngModel)]="password" placeholder="Password" name="password" required>
   </div>
   <div class="form-group">
-    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+    <button type="submit" class="btn btn-success btn-block">Sign In</button>
   </div>
   <div *ngIf="error" class="alert alert-danger fade in">
     <a href="#" class="close" data-dismiss="alert">&times;</a>
