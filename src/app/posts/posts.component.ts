@@ -84,7 +84,6 @@ export class PostsComponent implements OnInit {
 
     this.pService.changePostPermissions(postId, userId, value);
 
-
   }
 
   ngOnInit() {
