@@ -69,10 +69,12 @@ export class PostsComponent implements OnInit {
     if (e.srcElement.files.length == 0)
       this.pics = [];
     else {
+      this.pics = [];
       for (let i = 0; i < e.srcElement.files.length; i++) {
         this.pics.push(e.srcElement.files[i]);
       }
     }
+   
     // }
   }
 
