@@ -73,7 +73,6 @@ export class PostsComponent implements OnInit {
         this.pics.push(e.srcElement.files[i]);
       }
     }
-
     // }
   }
 
