@@ -50,18 +50,17 @@ export class SignupComponent implements OnInit {
 
   }
   onFileSelect(e: any) {
-    let filename = e.srcElement.files[0].name;
-    let elem = <HTMLInputElement>document.getElementById("file");
-    if(['jpg','png','gif'].indexOf(filename.substr(filename.lastIndexOf('.')+1)) === -1)
-    {
-      this.error = "Please Use A valid image file! (jpg,png,gif)";
-      elem.value = "";
-    }
-    else
-    {
+    // let filename = e.srcElement.files[0].name;
+    // let elem = <HTMLInputElement>document.getElementById("file");
+    // if(['jpg','png','gif'].indexOf(filename.substr(filename.lastIndexOf('.')+1)) === -1)
+    // {
+    //   this.error = "Please Use A valid image file! (jpg,png,gif)";
+    //   elem.value = "";
+    // }
+    // else
+    // {
       this.profilePic = e.srcElement.files[0];
-      this.error = "";
-    }
+    // }
     
   }
 

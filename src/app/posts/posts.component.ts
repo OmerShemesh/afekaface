@@ -15,8 +15,8 @@ import { CommentsComponent } from '../comments/comments.component';
   selector: 'app-posts',
   templateUrl: 'posts.component.html',
   styleUrls: ['posts.component.css'],
-  providers: [PostsService, FriendsService, DateService,StorageService],
-  directives:[CommentsComponent]
+  providers: [PostsService, FriendsService, DateService, StorageService],
+  directives: [CommentsComponent]
 
 })
 export class PostsComponent implements OnInit {
@@ -24,68 +24,72 @@ export class PostsComponent implements OnInit {
   postText: string;
   privatePost: boolean;
   currentUserName: string;
-  error: any;
+
   pics: any;
   myPosts;
   modalUrl;
 
 
   constructor(private loading: LoadingService, private pService: PostsService, private route: ActivatedRoute, private auth: AuthProvider) {
-   
+
 
 
 
   }
   addPost() {
-    this.pService.addPost(this.auth.getUserId(), this.currentUserName, this.postText, this.privatePost,this.pics);
+    this.pService.addPost(this.auth.getUserId(), this.currentUserName, this.postText, this.privatePost, this.pics);
     this.postText = "";
     this.pics = [];
   }
-  removePost(postId)
-  {
-    this.pService.removePost(postId,this.auth.getUserId());
+  removePost(postId) {
+    this.pService.removePost(postId, this.auth.getUserId());
   }
-  likePost(liked,post_writer,postId){
-    if(!liked)
-      this.pService.likePost(postId,post_writer,this.auth.getUserId());
+  likePost(liked, post_writer, postId) {
+    if (!liked)
+      this.pService.likePost(postId, post_writer, this.auth.getUserId());
   }
   onFileSelect(e: any) {
-    let elem = <HTMLInputElement>document.getElementById("pics");
-    let ok = true;
+    // let elem = <HTMLInputElement>document.getElementById("pics");
+    // let ok = true;
 
-    for (let i = 0; i < e.srcElement.files.length; i++) {
+    // for (let i = 0; i < e.srcElement.files.length; i++) {
 
-      let filename = e.srcElement.files[i].name;
-      if (['jpg', 'png', 'gif'].indexOf(filename.substr(filename.lastIndexOf('.') + 1)) === -1) {
-        this.error = "Please Use A valid image file! (jpg,png,gif)";
-        elem.value = "";
-        ok = false;
-        break;
+    //   let filename = e.srcElement.files[i].name;
+    //   if (['jpg', 'png', 'gif'].indexOf(filename.substr(filename.lastIndexOf('.') + 1)) === -1) {
+    //     this.error = "Please Use A valid image file! (jpg,png,gif)";
+    //     elem.value = "";
+    //     ok = false;
+    //     break;
 
-      }
-    }
+    //   }
+    // }
 
-    if (ok) {
-      this.error = "";
+    // if (ok) {
+    //this.error = "";
+    if (e.srcElement.files.length == 0)
+      this.pics = [];
+    else {
       for (let i = 0; i < e.srcElement.files.length; i++) {
         this.pics.push(e.srcElement.files[i]);
       }
     }
+
+    // }
   }
 
-  getModalUrl(url){
+  getModalUrl(url) {
     this.modalUrl = url;
   }
 
-  changePostPermissions(postId,userId,value){
+  changePostPermissions(postId, userId, value) {
 
-    this.pService.changePostPermissions(postId,userId,value);
+    this.pService.changePostPermissions(postId, userId, value);
 
 
   }
 
   ngOnInit() {
-     this.postText = "";
+    this.postText = "";
     this.modalUrl = "";
     this.privatePost = false;
     this.pics = [];
