@@ -85,9 +85,9 @@ export class PostsService {
         let likes:number = this.getPostLikes(userId,postId);
         this.af.database.object(`timeline/${post_writer}/${postId}/likes/value`).set(likes+1);
         this.af.database.object(`timeline/${userId}/${postId}/likes`).update({value:likes+1,liked:true});
-        this.af.database.object('/').update(this.fanoutLike(likes,postId,userId,friends));
+        this.af.database.object('/').update(this.fanoutLike(likes,postId,friends));
     }
-    fanoutLike(likes,postId,userId,friends){
+    fanoutLike(likes,postId,friends){
         let fanoutObject = {};
         friends.forEach(element => {
               fanoutObject[`timeline/${element.$key}/${postId}/likes/value`] = likes+1;

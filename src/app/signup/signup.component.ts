@@ -54,7 +54,6 @@ export class SignupComponent implements OnInit {
     let elem = <HTMLInputElement>document.getElementById("file");
     if(['jpg','png','gif'].indexOf(filename.substr(filename.lastIndexOf('.')+1)) === -1)
     {
-      console.log('wrong file');
       this.error = "Please Use A valid image file! (jpg,png,gif)";
       elem.value = "";
     }
