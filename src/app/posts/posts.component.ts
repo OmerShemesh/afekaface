@@ -55,7 +55,6 @@ export class PostsComponent implements OnInit {
 
     for (let i = 0; i < e.srcElement.files.length; i++) {
 
-      console.log("check");
       let filename = e.srcElement.files[i].name;
       if (['jpg', 'png', 'gif'].indexOf(filename.substr(filename.lastIndexOf('.') + 1)) === -1) {
         this.error = "Please Use A valid image file! (jpg,png,gif)";
@@ -79,7 +78,7 @@ export class PostsComponent implements OnInit {
   }
 
   changePostPermissions(postId,userId,value){
-    console.log('clicked on checkbox!');
+
     this.pService.changePostPermissions(postId,userId,value);
 
 
