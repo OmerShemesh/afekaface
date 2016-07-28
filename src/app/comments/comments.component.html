@@ -16,8 +16,8 @@
         <div class="comment-heading">
           <h4 class="user">{{comment.name}}</h4>
           <h5 class="time">{{comment.date}}</h5>
-          <div *ngIf="auth.getUserId()==comment.user_id" style="margin-right:3px" class="pull-right">
-            <a href="javascript:;" (click)="removeComment(comment.$key)" title="Remove Comment"><i class="fa fa-trash fa-2x"></i></a>
+          <div *ngIf="auth.getUserId()==comment.user_id" class="pull-right">
+            <a href="javascript:;" (click)="removeComment(comment.$key)" title="Remove Comment" style="color:#C31818"><i class="fa fa-times"></i></a>
           </div>
         </div>
         <p>{{comment.text}}</p>
