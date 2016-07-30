@@ -1,0 +1,13 @@
+
+<input placeholder="Enter Friend's name" type="text" [(ngModel)]="query">
+<li class="divider"></li>
+<div *ngFor="let user of users | async | search:query:currentUser">
+  <li>
+    <img *ngIf="user.profile_pic" class="profile-img img-circle" [src]="user.profile_pic">
+    <strong>{{user.name}}</strong>
+    <button  *ngIf="!fService.contains(user.$key)" (click)="addFriend(user.$key)" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle" title="Add Friend"></i></button>
+  </li>
+  <li class="divider"></li>
+  
+</div>
+

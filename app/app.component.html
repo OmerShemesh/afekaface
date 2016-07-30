@@ -1,0 +1,59 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      <a class="navbar-brand" href="/">AfekaFace</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li *ngIf="hasAuth()" class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search For Friends <i class="fa fa-search"></i></a>
+          <ul class="dropdown-menu scrollable-menu" role="menu">
+            <app-search (alert)="onAlert($event)"></app-search>
+          </ul>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="hasAuth()">
+          <img [src]="profile_pic" class="img-circle profile-img">
+
+        </li>
+
+        <li *ngIf="!hasAuth()" class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><i class="fa fa-user fa-2x" aria-hidden="true"></i></b> <span class="caret"></span></a>
+          <ul id="login-dp" class="dropdown-menu">
+            <li>
+              <div class="row">
+                <div class="col-md-12">
+                  <app-login></app-login>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li *ngIf="hasAuth()"><a (click)="logout()"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a></li>
+      </ul>
+
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+
+</nav>
+<div class="container">
+  <loading-indicator></loading-indicator>
+  <router-outlet></router-outlet>
+</div>
+
+<div *ngIf="alert" id="alert_box" style="position: fixed; top:0; left: 0" class="alert alert-info fade in">
+  <a href="#" class="close" data-dismiss="alert">&times;</a>
+  <strong>{{alert}}</strong>
+</div>

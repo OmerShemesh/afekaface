@@ -1,0 +1,28 @@
+<div class="post-footer">
+
+  <div class="input-group">
+    <input [(ngModel)]="commentText" class="form-control" placeholder="Add a comment" type="text" required>
+    <span class="input-group-addon">
+      <a (click)="addComment()"><i class="fa fa-edit"></i></a>  
+    </span>
+  </div>
+
+  <ul class="comments-list">
+    <li *ngFor="let comment of comments | async" class="comment">
+      <a class="pull-left" href="#">
+        <img class="avatar" [src]="cService.getUserProfilePic(comment.user_id)" alt="avatar">
+      </a>
+      <div class="comment-body">
+        <div class="comment-heading">
+          <h4 class="user">{{comment.name}}</h4>
+          <h5 class="time">{{comment.date}}</h5>
+          <div *ngIf="auth.getUserId()==comment.user_id" class="pull-right">
+            <a href="javascript:;" (click)="removeComment(comment.$key)" title="Remove Comment" style="color:#C31818"><i class="fa fa-times"></i></a>
+          </div>
+        </div>
+        <p>{{comment.text}}</p>
+        
+      </div>
+    </li>
+  </ul>
+</div>

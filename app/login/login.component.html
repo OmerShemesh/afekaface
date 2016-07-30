@@ -1,0 +1,24 @@
+
+
+<form #loginForm="ngForm" class="form" id="login-nav" (ngSubmit)="login()">
+
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+      <input type="email" class="form-control" [(ngModel)]="email" placeholder="Email Address" name="email" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+      <input type="password" class="form-control" [(ngModel)]="password" placeholder="Password" name="password" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-success btn-block">Sign In</button>
+  </div>
+  <div *ngIf="error" class="alert alert-danger fade in">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong>{{error}}</strong>
+  </div>
+</form>

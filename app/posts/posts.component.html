@@ -1,0 +1,97 @@
+<div *ngIf="!loading.active && auth.authenticated" class="container">
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-white panel-shadow">
+            <form #postForm="ngForm" class="form" (ngSubmit)="addPost()">
+                <div class="form-group">
+                    <textarea type="text" name="postText" [(ngModel)]="postText" class="form-control" placeholder="What's on your mind?" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="photos">Photos</label>
+                    <input id="pics" accept="image/*" (change)="onFileSelect($event)" name="photos" type="file" multiple/>
+                </div>
+                <div class="form-group">
+                    <input [(ngModel)]="privatePost" type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off"
+                    />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
+                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                    <span> </span>
+                    </label>
+                        <label for="fancy-checkbox-primary" class="[ btn btn-default active ]">
+                        Private Post?
+                    </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Post</button>
+                </div>
+            </form>
+
+            <div *ngIf="error" class="alert alert-danger fade in">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>{{error}}</strong>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="col-md-8 col-md-offset-2">
+        <div *ngFor="let post of myPosts | async">
+            <div *ngIf="(post.private && post.user_id == auth.getUserId()) || (!post.private) " class="panel panel-white post panel-shadow">
+                <div *ngIf="post.user_id == auth.getUserId()" style="margin-right:11px;margin-top:2px" class="pull-right">
+                    <a href="javascript:;" (click)="removePost(post.$key)" title="Remove Post" style="color:#C31818"><i class="fa fa-times"></i></a>
+                </div>
+                <div class="post-heading">
+
+
+                    <div class="pull-left image">
+
+                        <img [src]="pService.getUserProfilePic(post.user_id)" class="img-circle avatar" alt="user profile image">
+                    </div>
+
+                    <div *ngIf="post.photos" style="margin-right:20px; margin-top:10px" class="pull-right panel panel-info">
+
+                        <img (click)="getModalUrl(pic)" data-toggle="modal" data-target=".pop-up" class="cover-item" *ngFor="let pic of post.photos"
+                            [src]="pic">
+
+                    </div>
+                    <div class="pull-left meta">
+                        <div class="title h5">
+                            <b>{{post.name}}</b> made a post.
+                        </div>
+                        <a style="display:inline-block" href="javascript:;" title="Like Post" (click)="likePost(post.likes.liked,post.user_id,post.$key)"><i class="fa fa-thumbs-up"></i></a>
+                        <h6 style="display:inline-block" class="text-muted time">{{post.likes.value}}</h6>
+                        <h6 class="text-muted time">at {{post.date}}</h6>
+                        <div *ngIf="post.user_id == auth.getUserId()">
+                            <label for="check">Private?</label>
+                            <input name="check" #permission (change)="changePostPermissions(post.$key,post.user_id,permission.checked)" [ngModel]="post.private"
+                                type="checkbox">
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="post-description">
+                    <p>{{post.text}}</p>
+                </div>
+                <comment-list [post_id]="post.$key" [post_writer]="post.user_id"></comment-list>
+            </div>
+        </div>
+
+
+        <div class="modal fade pop-up">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img [src]="modalUrl" class="img-responsive img-rounded center-block" alt="">
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+    </div>
+</div>
