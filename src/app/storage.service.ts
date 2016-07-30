@@ -14,7 +14,6 @@ export class StorageService {
         this.storage = firebase.storage();
         this.storageRef = this.storage.ref();
     }
-
     uploadProfilePic(photo, userId) {
         return new Observable(observer => {
             var uploadTask = this.storageRef.child(`users/${userId}/profile_pic/${photo.name}`).put(photo);
