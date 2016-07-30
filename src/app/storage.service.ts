@@ -38,7 +38,6 @@ export class StorageService {
         });
     }
 
-    
     uploadPostPics(photos,userId) {
         return new Observable(observer => {
             photos.forEach(element => {
