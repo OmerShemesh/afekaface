@@ -37,6 +37,7 @@ export class PostsComponent implements OnInit {
 
   }
   addPost() {
+    this.postText = this.postText.replace(/\n/g,'<br>');
     this.pService.addPost(this.auth.getUserId(), this.currentUserName, this.postText, this.privatePost, this.pics);
     this.postText = "";
     this.pics = [];

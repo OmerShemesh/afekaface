@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit} from '@angular/core';
 import { AngularFire,FirebaseObjectObservable } from 'angularfire2';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
@@ -23,7 +23,7 @@ import { SearchComponent } from './search/search.component';
 
 
 
-export class AppComponent  {
+export class AppComponent implements OnInit  {
   
 
   numbers : any;
@@ -49,6 +49,9 @@ export class AppComponent  {
  
   onAlert(msg:string){
     this.alert = msg;
+    setTimeout(()=>{
+      this.alert="";
+    },2000);
   }
   onLogin(pic)
   {
@@ -56,9 +59,11 @@ export class AppComponent  {
   }
   ngOnInit()
   {
-    this.auth.getUserData().subscribe((userData)=>{
-      this.profile_pic = userData.profile_pic;
-    })
+      this.auth.getUserData().subscribe((userData)=>{
+        this.profile_pic = userData.profile_pic;
+      })
   }
+
+ 
  
 }

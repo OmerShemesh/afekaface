@@ -75,3 +75,13 @@ display: block;
         border-top:0 none;
     }
 }
+
+
+.alert-fixed {
+    position:fixed; 
+    top: 0px; 
+    left: 20%; 
+    width: 150px;
+    z-index:9999; 
+    border-radius:0px
+}

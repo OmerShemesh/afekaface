@@ -27,7 +27,7 @@ export class SearchComponent implements OnInit {
 
   addFriend(friendId:string) {
     this.fService.addFriend(friendId);
-    this.alert.emit("Added new friend!");
+    this.alert.emit("Added New Friend!");
   }
   
 

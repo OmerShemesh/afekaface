@@ -13,10 +13,21 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
   <style>
+    @import 'https://fonts.googleapis.com/css?family=Open+Sans';
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-image: url(bg.jpg);
+      padding-top: 70px;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+    
     .spinner {
       width: 40px;
       height: 40px;
-      background-color: #333;
+      background-color: #fa6105;
       margin: 100px auto;
       -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
       animation: sk-rotateplane 1.2s infinite ease-in-out;
@@ -48,7 +59,6 @@
         -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
       }
     }
-    
   </style>
   <script>
   // See http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/
@@ -71,7 +81,7 @@
     <div class="spinner">
     </div>
   </app-root>
-  
+
 
 
   {{#each scripts.polyfills}}
