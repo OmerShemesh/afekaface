@@ -38,8 +38,6 @@ export class AppComponent implements OnInit  {
   {
     this.auth.logout();
     this.router.navigate(['/signup']);
-    
-    
   }
 
   hasAuth()
