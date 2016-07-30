@@ -24,7 +24,7 @@ export class PostsService {
             this.sr.uploadPostPics(pics, userId).subscribe((data: any) => {
                 urls.push(data.snapshot.downloadURL);
                 if (pics.length == urls.length) {
-                    let post = { user_id: userId, name: name, text: postText, private: privatePost, date: this.dService.convertTimestamp(Date.now()), photos: urls,likes:{value:0,liked:false} };
+                    let post = { user_id: userId, name: name, text: postText, private: privatePost, date: this.dService.convertTimestamp(Date.now()), photos: urls, likes: { value: 0, liked: false } };
                     let key = this.af.database.list(`timeline/${userId}`).push(post).getKey();
                     let friends = this.fService.getFriends();
                     this.af.database.object('/').update(this.fanoutPost(friends, post, key));
@@ -33,11 +33,11 @@ export class PostsService {
             })
         }
         else {
+            let post = { user_id: userId, name: name, text: postText, private: privatePost, date: this.dService.convertTimestamp(Date.now()), likes: { value: 0, liked: false } };
+            let key = this.af.database.list(`timeline/${userId}`).push(post).getKey();
+            let friends = this.fService.getFriends();
+            this.af.database.object('/').update(this.fanoutPost(friends, post, key));
             setTimeout(() => {
-                let post = { user_id: userId, name: name, text: postText, private: privatePost, date: this.dService.convertTimestamp(Date.now()),likes:{value:0,liked:false}  };
-                let key = this.af.database.list(`timeline/${userId}`).push(post).getKey();
-                let friends = this.fService.getFriends();
-                this.af.database.object('/').update(this.fanoutPost(friends, post, key));
                 this.loading.stop();
             }, 2000)
 
@@ -70,31 +70,31 @@ export class PostsService {
         return fanoutObject;
     }
 
-    
 
-    getPostLikes(post_writer,postId){
-        let likes:number = 0;
-        this.af.database.object(`timeline/${post_writer}/${postId}/likes`).subscribe((val)=>{
+
+    getPostLikes(post_writer, postId) {
+        let likes: number = 0;
+        this.af.database.object(`timeline/${post_writer}/${postId}/likes`).subscribe((val) => {
             likes = val.value;
         });
 
         return likes;
     }
-    likePost(postId,post_writer,userId){
-        let friends = this.fService.getPostFriends(post_writer);   
-        let likes:number = this.getPostLikes(userId,postId);
-        this.af.database.object(`timeline/${post_writer}/${postId}/likes/value`).set(likes+1);
-        this.af.database.object(`timeline/${userId}/${postId}/likes`).update({value:likes+1,liked:true});
-        this.af.database.object('/').update(this.fanoutLike(likes,postId,friends));
+    likePost(postId, post_writer, userId) {
+        let friends = this.fService.getPostFriends(post_writer);
+        let likes: number = this.getPostLikes(userId, postId);
+        this.af.database.object(`timeline/${post_writer}/${postId}/likes/value`).set(likes + 1);
+        this.af.database.object(`timeline/${userId}/${postId}/likes`).update({ value: likes + 1, liked: true });
+        this.af.database.object('/').update(this.fanoutLike(likes, postId, friends));
     }
-    fanoutLike(likes,postId,friends){
+    fanoutLike(likes, postId, friends) {
         let fanoutObject = {};
         friends.forEach(element => {
-              fanoutObject[`timeline/${element.$key}/${postId}/likes/value`] = likes+1;
+            fanoutObject[`timeline/${element.$key}/${postId}/likes/value`] = likes + 1;
         });
         return fanoutObject;
 
-        
+
     }
 
     getUserPosts(userId: string) {
@@ -122,11 +122,19 @@ export class PostsService {
     changePostPermissions(postId, userId, value) {
         let friends = this.fService.getFriends();
         this.af.database.object(`/timeline/${userId}/${postId}`).update({ private: value });
-        friends.forEach(element => {
-            this.af.database.object(`timeline/${element.$key}/${postId}`).update({ private: value });
-        });
+        // friends.forEach(element => {
+        //     this.af.database.object(`timeline/${element.$key}/${postId}`).update({ private: value });
+        // });
+        this.af.database.object('/').update(this.fanoutPermissions(friends,postId,value));
     }
-    
+    fanoutPermissions(friends,postId,value){
+        let fanoutObject = {};
+        friends.forEach(element => {
+            fanoutObject[`timeline/${element.$key}/${postId}/private`] = value;
+        });
+        return fanoutObject;
+
+    }
 
 
 
