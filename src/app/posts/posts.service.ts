@@ -39,7 +39,7 @@ export class PostsService {
             this.af.database.object('/').update(this.fanoutPost(friends, post, key));
             setTimeout(() => {
                 this.loading.stop();
-            }, 2000)
+            }, 1000)
 
         }
 

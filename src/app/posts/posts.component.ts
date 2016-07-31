@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, trigger, state, style, transition, animate}  from '@angular/core';
 import { LoadingService } from '../loading/loading.service';
 import { PostsService } from './posts.service';
 import { ActivatedRoute } from '@angular/router';
@@ -37,7 +37,7 @@ export class PostsComponent implements OnInit {
 
   }
   addPost() {
-    this.postText = this.postText.replace(/\n/g,'<br>');
+    this.postText = this.postText.replace(/\n/g, '<br>');
     this.pService.addPost(this.auth.getUserId(), this.currentUserName, this.postText, this.privatePost, this.pics);
     this.postText = "";
     this.pics = [];
@@ -75,7 +75,7 @@ export class PostsComponent implements OnInit {
         this.pics.push(e.srcElement.files[i]);
       }
     }
-   
+
     // }
   }
 
@@ -100,7 +100,7 @@ export class PostsComponent implements OnInit {
     this.myPosts = this.pService.getUserPosts(this.auth.getUserId());
     setTimeout(() => {
       this.loading.stop();
-    }, 1500);
+    }, 1000);
   }
 
 
