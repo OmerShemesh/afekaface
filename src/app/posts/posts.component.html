@@ -35,9 +35,6 @@
         </div>
     </div>
 
-
-
-
     <div class="col-md-8 col-md-offset-2">
         <div *ngFor="let post of myPosts | async" >
             <div *ngIf="(post.private && post.user_id == auth.getUserId()) || (!post.private)"  class="panel panel-white post panel-shadow animated fadeIn">
