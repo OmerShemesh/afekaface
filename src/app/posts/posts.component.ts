@@ -9,7 +9,7 @@ import { DateService } from '../date.service';
 import { StorageService } from '../storage.service';
 import { CommentsComponent } from '../comments/comments.component';
 
-
+declare var toastr;
 @Component({
   moduleId: module.id,
   selector: 'app-posts',
@@ -48,6 +48,9 @@ export class PostsComponent implements OnInit {
   likePost(liked, post_writer, postId) {
     if (!liked)
       this.pService.likePost(postId, post_writer, this.auth.getUserId());
+    else
+      toastr.warning("Already liked this post!");
+
   }
   onFileSelect(e: any) {
     // let elem = <HTMLInputElement>document.getElementById("pics");
@@ -86,6 +89,7 @@ export class PostsComponent implements OnInit {
   changePostPermissions(postId, userId, value) {
 
     this.pService.changePostPermissions(postId, userId, value);
+    toastr.info(`Post is now ${value ? 'Private' : 'Public'}` );
 
   }
 
@@ -98,9 +102,22 @@ export class PostsComponent implements OnInit {
     this.loading.start();
     this.auth.getUserData().subscribe((user) => this.currentUserName = user.name);
     this.myPosts = this.pService.getUserPosts(this.auth.getUserId());
+    toastr.options = {
+      "closeButton": true,
+      "progressBar": true,
+      "positionClass": "toast-top-center",
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "3000",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
     setTimeout(() => {
       this.loading.stop();
     }, 1000);
+
+     
   }
 
 

@@ -13,10 +13,12 @@ import { CommentsService } from './comments.service';
 export class CommentsComponent implements OnInit {
 
   currentUserName: string;
-  comments;
+  @Input() comments:any[];
   commentText:string;
   @Input() post_id : string;
   @Input() post_writer:string;
+  commentKeys:any[];
+
   constructor(private auth:AuthProvider,private cService:CommentsService) {
      
    
@@ -32,9 +34,13 @@ export class CommentsComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.comments = this.cService.getPostComments(this.auth.getUserId(),this.post_id);
+      //this.comments = this.cService.getPostComments(this.auth.getUserId(),this.post_id);
+      
       this.commentText = "";
       this.auth.getUserData().subscribe((user) => this.currentUserName = user.name);
+      if(this.comments != null)
+        this.commentKeys = Object.keys(this.comments);
+      
   }
   removeComment(commentId)
   {

@@ -73,7 +73,7 @@
                 <div class="post-description">
                     <p [innerHTML]="post.text"></p>
                 </div>
-                <comment-list [post_id]="post.$key" [post_writer]="post.user_id"></comment-list>
+                <comment-list [comments]="post.comments" [post_id]="post.$key" [post_writer]="post.user_id"></comment-list>
             </div>
         </div>
 

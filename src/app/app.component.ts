@@ -45,12 +45,7 @@ export class AppComponent implements OnInit  {
     return this.auth.authenticated;
   }
  
-  onAlert(msg:string){
-    this.alert = msg;
-    setTimeout(()=>{
-      this.alert="";
-    },2000);
-  }
+  
   onLogin(pic)
   {
     this.profile_pic = pic;

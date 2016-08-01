@@ -8,19 +8,19 @@
   </div>
 
   <ul class="comments-list">
-    <li *ngFor="let comment of comments | async" class="comment">
+    <li *ngFor="let key of commentKeys" class="comment">
       <a class="pull-left" href="#">
-        <img class="avatar" [src]="cService.getUserProfilePic(comment.user_id)" alt="avatar">
+        <img class="avatar" [src]="cService.getUserProfilePic(comments[key].user_id)" alt="avatar">
       </a>
       <div class="comment-body">
         <div class="comment-heading">
-          <h4 class="user">{{comment.name}}</h4>
-          <h5 class="time">{{comment.date}}</h5>
-          <div *ngIf="auth.getUserId()==comment.user_id" class="pull-right">
-            <a href="javascript:;" (click)="removeComment(comment.$key)" title="Remove Comment" style="color:#C31818"><i class="fa fa-times"></i></a>
+          <h4 class="user">{{comments[key].name}}</h4>
+          <h5 class="time">{{comments[key].date}}</h5>
+          <div *ngIf="auth.getUserId()==comments[key].user_id" class="pull-right">
+            <a href="javascript:;" (click)="removeComment(key)" title="Remove Comment" style="color:#C31818"><i class="fa fa-times"></i></a>
           </div>
         </div>
-        <p>{{comment.text}}</p>
+        <p>{{comments[key].text}}</p>
         
       </div>
     </li>
