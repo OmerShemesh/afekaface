@@ -46,7 +46,8 @@
   padding: 15px;
 }
 .post .post-description p {
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 400;
 }
 .post .post-description .stats {
   margin-top: 20px;
@@ -134,3 +135,7 @@
   display:inline-block;
 }
 
+a.plink{
+  font-size:14px;
+  text-decoration: none;
+}

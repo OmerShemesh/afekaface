@@ -39,8 +39,9 @@
 
 
     <div class="col-md-8 col-md-offset-2">
-        <div *ngFor="let post of myPosts | async">
-            <div *ngIf="(post.private && post.user_id == auth.getUserId()) || (!post.private) " class="panel panel-white post panel-shadow">
+        <div *ngFor="let post of myPosts | async" >
+            <div *ngIf="(post.private && post.user_id == auth.getUserId()) || (!post.private)"  class="panel panel-white post panel-shadow animated fadeIn">
+
                 <div *ngIf="post.user_id == auth.getUserId()" style="margin-right:11px;margin-top:2px" class="pull-right">
                     <a href="javascript:;" (click)="removePost(post.$key)" title="Remove Post" style="color:#C31818"><i class="fa fa-times"></i></a>
                 </div>
@@ -51,7 +52,9 @@
 
                         <img [src]="pService.getUserProfilePic(post.user_id)" class="img-circle avatar" alt="user profile image">
                     </div>
-
+                    <div *ngIf="post.user_id == auth.getUserId()" class="pull-right">
+                        <a href="javascript:;" class="plink" (click)="changePostPermissions(post.$key,post.user_id,!post.private)">{{post.private ? 'Private Post' : 'Public Post'}}</a>
+                    </div>
                     <div *ngIf="post.photos" style="margin-right:20px; margin-top:10px" class="pull-right panel panel-info">
 
                         <img (click)="getModalUrl(pic)" data-toggle="modal" data-target=".pop-up" class="cover-item" *ngFor="let pic of post.photos"
@@ -65,18 +68,12 @@
                         <a style="display:inline-block" href="javascript:;" title="Like Post" (click)="likePost(post.likes.liked,post.user_id,post.$key)"><i class="fa fa-thumbs-up"></i></a>
                         <h6 style="display:inline-block" class="text-muted time">{{post.likes.value}}</h6>
                         <h6 class="text-muted time">at {{post.date}}</h6>
-                        <div *ngIf="post.user_id == auth.getUserId()">
-                            <label for="check">Private?</label>
-                            <input name="check" #permission (change)="changePostPermissions(post.$key,post.user_id,permission.checked)" [ngModel]="post.private"
-                                type="checkbox">
-                           
-                        </div>
                     </div>
                 </div>
                 <div class="post-description">
-                    <p>{{post.text}}</p>
+                    <p [innerHTML]="post.text"></p>
                 </div>
-                <comment-list [post_id]="post.$key" [post_writer]="post.user_id"></comment-list>
+                <comment-list [comments]="post.comments" [post_id]="post.$key" [post_writer]="post.user_id"></comment-list>
             </div>
         </div>
 

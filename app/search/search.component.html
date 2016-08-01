@@ -4,8 +4,8 @@
 <div *ngFor="let user of users | async | search:query:currentUser">
   <li>
     <img *ngIf="user.profile_pic" class="profile-img img-circle" [src]="user.profile_pic">
-    <strong>{{user.name}}</strong>
-    <button  *ngIf="!fService.contains(user.$key)" (click)="addFriend(user.$key)" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle" title="Add Friend"></i></button>
+    <strong>{{user.name}} </strong>
+    <a href="javascript:;" *ngIf="!fService.contains(user.$key)" (click)="addFriend(user.$key)"  title="Add Friend"><i class="fa fa-plus" ></i></a>
   </li>
   <li class="divider"></li>
   
