@@ -18,6 +18,7 @@ export class FriendsService {
     addFriend(friendId: string) {
         this.af.database.object(`users/${this.currentUser}/friends/${friendId}`).set(true);
         this.af.database.object(`users/${friendId}/friends/${this.currentUser}`).set(true);
+        
     }
     contains(id) {
         return this.friendsList.map(function(item){return item.$key}).indexOf(id) != -1;
