@@ -5,7 +5,8 @@ import { FIREBASE_PROVIDERS, defaultFirebase,AuthMethods, AuthProviders, firebas
 import { disableDeprecatedForms,provideForms } from '@angular/forms';
 import { APP_ROUTER_PROVIDERS } from './app/app.routes'
 import { LoadingService } from './app/loading/loading.service';
-
+import { AuthProvider } from './app/auth/auth.service';
+import { AuthGuard } from './app/auth/auth.guard';
 
 
 
@@ -26,9 +27,12 @@ bootstrap(AppComponent,[
     method:AuthMethods.Password,
     remember:"none"
   }),
+  AuthGuard,
+  AuthProvider,
   disableDeprecatedForms(),
   provideForms(),
   APP_ROUTER_PROVIDERS,
-  LoadingService
+  LoadingService,
+  
 ]);
 
