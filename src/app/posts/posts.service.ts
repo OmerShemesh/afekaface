@@ -24,7 +24,7 @@ export class PostsService {
             this.sr.uploadPostPics(pics, userId).subscribe((data: any) => {
                 urls.push(data.snapshot.downloadURL);
                 if (pics.length == urls.length) {
-                    let post = { user_id: userId, name: name, text: postText, private: privatePost, date: this.dService.convertTimestamp(Date.now()), photos: urls, likes: { value: 0, liked: false } };
+                    let post = { user_id: userId, name: name, text: postText, private: privatePost, date: this.dService.convertTimestamp(Date.now()),date_stamp:Date.now(), photos: urls, likes: { value: 0, liked: false } };
                     let key = this.af.database.list(`timeline/${userId}`).push(post).getKey();
                     let friends = this.fService.getFriends();
                     this.af.database.object('/').update(this.fanoutPost(friends, post, key));
@@ -33,7 +33,7 @@ export class PostsService {
             })
         }
         else {
-            let post = { user_id: userId, name: name, text: postText, private: privatePost, date: this.dService.convertTimestamp(Date.now()), likes: { value: 0, liked: false } };
+            let post = { user_id: userId, name: name, text: postText, private: privatePost, date: this.dService.convertTimestamp(Date.now()),date_stamp:Date.now(), likes: { value: 0, liked: false } };
             let key = this.af.database.list(`timeline/${userId}`).push(post).getKey();
             let friends = this.fService.getFriends();
             this.af.database.object('/').update(this.fanoutPost(friends, post, key));
@@ -101,6 +101,7 @@ export class PostsService {
         return this.af.database.list(`/timeline/${userId}`, {
             query: {
                 limitToLast: 12,
+                orderByChild:'date_stamp'
             }
         }).map((result) => { return result.reverse() });
     }

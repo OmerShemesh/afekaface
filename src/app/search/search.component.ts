@@ -3,8 +3,7 @@ import { SearchPipe }  from './search.pipe'
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AuthProvider } from '../auth/auth.service';
 import { FriendsService } from '../friends.service';
-import {LoadingService} from '../loading/loading.service'
-
+import { LoadingService } from '../loading/loading.service';
 
 
 declare var toastr;
@@ -30,38 +29,49 @@ export class SearchComponent implements OnInit {
   }
 
   addFriend(friendId: string) {
-    this.loading.start();
+
     this.fService.addFriend(friendId);
-    //this.alert.emit("Added New Friend!");
+    this.loading.start();
     this.updateTimeline(this.currentUser,friendId);
     setTimeout(()=>{
-      toastr.info("Added new Friend!");
       this.loading.stop();
-    },1500);
+      toastr.info("Added new Friend!");
+    }, 1000);
     
+
+
   }
 
-  updateTimeline(currentUser, newFriend) {
-    this.af.database.object(`timeline/${newFriend}`, {
-      query: {
-        orderByChild: 'user_id',
-        equalTo: currentUser
+
+  updateTimeline(currentUser, friendId) {
+    let obj = {};
+    this.af.database.list(`timeline/${friendId}`,{
+      query:{
+        orderByChild:'user_id',
+        equalTo:friendId
       }
     }).subscribe((posts) => {
-      console.log(posts);
-      //this.af.database.object(`timeline/${currentUser}`).update(posts);
+      posts.forEach(element => {
+        obj[`timeline/${currentUser}/${element.$key}`] = { date: element.date, date_stamp: element.date_stamp, likes: {liked:false,value:element.likes.value}, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
+      });
+      this.af.database.object('/').update(obj);
     });
-    //  this.af.database.object(`timeline/${currentUser}`, {
-    //   query: {
-    //     orderByChild: 'user_id',
-    //     equalTo: currentUser
-    //   }
-    // }).subscribe((posts) => {
-    //   this.af.database.object(`timeline/${newFriend}`).update(posts);
-    // });
+
+
+     this.af.database.list(`timeline/${currentUser}`,{
+       query:{
+         orderByChild:'user_id',
+         equalTo:currentUser
+       }
+     }).subscribe((posts) => {
+      posts.forEach(element => {
+        obj[`timeline/${friendId}/${element.$key}`] = { date: element.date, date_stamp: element.date_stamp, likes: {liked:false,value:element.likes.value}, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
+      });
+      this.af.database.object('/').update(obj);
+    });
+
+
   }
-
-
   ngOnInit() {
     toastr.options = {
       "closeButton": true,
