@@ -37,7 +37,7 @@
 
     <div class="col-md-8 col-md-offset-2">
         <div *ngFor="let post of myPosts | async" >
-            <div *ngIf="(post.private && post.user_id == auth.getUserId()) || (!post.private)"  class="panel panel-white post panel-shadow animated fadeIn">
+            <div *ngIf="(post.private && post.user_id == auth.getUserId()) || (!post.private)"  class="panel panel-white post panel-shadow">
 
                 <div *ngIf="post.user_id == auth.getUserId()" style="margin-right:11px;margin-top:2px" class="pull-right">
                     <a href="javascript:;" (click)="removePost(post.$key)" title="Remove Post" style="color:#C31818"><i class="fa fa-times"></i></a>
