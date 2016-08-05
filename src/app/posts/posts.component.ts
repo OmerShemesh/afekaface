@@ -41,6 +41,7 @@ export class PostsComponent implements OnInit {
     this.pService.addPost(this.auth.getUserId(), this.currentUserName, this.postText, this.privatePost, this.pics);
     this.postText = "";
     this.pics = [];
+    this.privatePost = false;
   }
   removePost(postId) {
     this.pService.removePost(postId, this.auth.getUserId());

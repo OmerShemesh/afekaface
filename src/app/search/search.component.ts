@@ -22,7 +22,7 @@ export class SearchComponent implements OnInit {
   users: FirebaseListObservable<any>;
   query: string;
   currentUser: string;
-  @Output() alert = new EventEmitter();
+  //@Output() alert = new EventEmitter();
 
   constructor(private af: AngularFire, private auth: AuthProvider, private fService: FriendsService,private loading:LoadingService) {
 
