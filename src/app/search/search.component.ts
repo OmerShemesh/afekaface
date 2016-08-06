@@ -44,16 +44,22 @@ export class SearchComponent implements OnInit {
 
 
   updateTimeline(currentUser, friendId) {
-    let obj = {};
+    
     this.af.database.list(`timeline/${friendId}`, {
       query: {
         orderByChild: 'user_id',
         equalTo: friendId
       }
     }).subscribe((posts) => {
+      let obj = {};
       posts.forEach(element => {
-        obj[`timeline/${currentUser}/${element.$key}`] = { date: element.date, date_stamp: element.date_stamp, likes: { liked: false, value: element.likes.value }, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
+        if (element.comments)
+          obj[`timeline/${currentUser}/${element.$key}`] = { comments: element.comments, date: element.date, date_stamp: element.date_stamp, likes: { liked: false, value: element.likes.value }, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
+        else
+          obj[`timeline/${currentUser}/${element.$key}`] = { date: element.date, date_stamp: element.date_stamp, likes: { liked: false, value: element.likes.value }, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
+
       });
+      console.log(posts);
       this.af.database.object('/').update(obj);
     });
 
@@ -64,8 +70,12 @@ export class SearchComponent implements OnInit {
         equalTo: currentUser
       }
     }).subscribe((posts) => {
+      let obj = {};
       posts.forEach(element => {
-        obj[`timeline/${friendId}/${element.$key}`] = { date: element.date, date_stamp: element.date_stamp, likes: { liked: false, value: element.likes.value }, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
+        if (element.comments)
+          obj[`timeline/${friendId}/${element.$key}`] = { comments: element.comments, date: element.date, date_stamp: element.date_stamp, likes: { liked: false, value: element.likes.value }, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
+        else
+          obj[`timeline/${friendId}/${element.$key}`] = { date: element.date, date_stamp: element.date_stamp, likes: { liked: false, value: element.likes.value }, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
       });
       this.af.database.object('/').update(obj);
     });
