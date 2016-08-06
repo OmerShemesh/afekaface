@@ -34,7 +34,6 @@ export class CommentsComponent implements OnInit {
   }
 
   ngOnInit() {
-      //this.comments = this.cService.getPostComments(this.auth.getUserId(),this.post_id);
       
       this.commentText = "";
       this.auth.getUserData().subscribe((user) => this.currentUserName = user.name);

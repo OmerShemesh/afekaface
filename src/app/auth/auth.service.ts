@@ -1,45 +1,41 @@
 import {Injectable} from "@angular/core";
-import {AngularFire, AuthProviders, AuthMethods,FirebaseAuth,FirebaseAuthState} from "angularfire2";
+import {AngularFire, AuthProviders, AuthMethods, FirebaseAuth, FirebaseAuthState} from "angularfire2";
 import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class AuthProvider {
   private authState: FirebaseAuthState = null;
-  
 
-  constructor(private af: AngularFire,public _auth:FirebaseAuth ) {
-    _auth.subscribe((state:FirebaseAuthState)=>{
+
+  constructor(private af: AngularFire, public _auth: FirebaseAuth) {
+    _auth.subscribe((state: FirebaseAuthState) => {
       this.authState = state;
     })
 
   }
 
-  getUserId()
-  {
-     return this.authState.uid;
+  getUserId() {
+    return this.authState.uid;
   }
-  
-  public get authenticated() : boolean {
+
+  public get authenticated(): boolean {
     return this.authState !== null;
   }
-  
-  getUserData():Observable<any> {
+
+  getUserData(): Observable<any> {
     return Observable.create(observer => {
       this.af.auth.subscribe(authData => {
         if (authData) {
           this.af.database.object("users/" + authData.uid).subscribe(userData => {
             observer.next(userData);
           });
-        } 
-        // else {
-        //   observer.error();
-        // }
+        }
       });
     });
   }
 
   registerUser(credentials: any) {
-   return Observable.create(observer => {
+    return Observable.create(observer => {
       this.af.auth.createUser(credentials).then(authData => {
         credentials.created = true;
         observer.next(credentials);
@@ -62,12 +58,12 @@ export class AuthProvider {
     });
   }
 
- 
+
 
   logout() {
     this.af.auth.logout();
-  
-    
-    
+
+
+
   }
 }

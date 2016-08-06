@@ -54,23 +54,6 @@ export class PostsComponent implements OnInit {
 
   }
   onFileSelect(e: any) {
-    // let elem = <HTMLInputElement>document.getElementById("pics");
-    // let ok = true;
-
-    // for (let i = 0; i < e.srcElement.files.length; i++) {
-
-    //   let filename = e.srcElement.files[i].name;
-    //   if (['jpg', 'png', 'gif'].indexOf(filename.substr(filename.lastIndexOf('.') + 1)) === -1) {
-    //     this.error = "Please Use A valid image file! (jpg,png,gif)";
-    //     elem.value = "";
-    //     ok = false;
-    //     break;
-
-    //   }
-    // }
-
-    // if (ok) {
-    //this.error = "";
     if (e.srcElement.files.length == 0)
       this.pics = [];
     else {
@@ -79,8 +62,6 @@ export class PostsComponent implements OnInit {
         this.pics.push(e.srcElement.files[i]);
       }
     }
-
-    // }
   }
 
   getModalUrl(url) {
@@ -99,7 +80,6 @@ export class PostsComponent implements OnInit {
     this.modalUrl = "";
     this.privatePost = false;
     this.pics = [];
-    //this.myPosts = pService.getUserPosts(this.auth.getUserId());
     this.loading.start();
     this.auth.getUserData().subscribe((user) => this.currentUserName = user.name);
     this.myPosts = this.pService.getUserPosts(this.auth.getUserId());

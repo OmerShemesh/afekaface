@@ -19,12 +19,12 @@ declare var toastr;
 })
 export class SearchComponent implements OnInit {
 
-  users: FirebaseListObservable<any>;
+  users: any;
   query: string;
   currentUser: string;
-  //@Output() alert = new EventEmitter();
 
-  constructor(private af: AngularFire, private auth: AuthProvider, private fService: FriendsService,private loading:LoadingService) {
+
+  constructor(private af: AngularFire, private auth: AuthProvider, private fService: FriendsService, private loading: LoadingService) {
 
   }
 
@@ -32,12 +32,12 @@ export class SearchComponent implements OnInit {
 
     this.fService.addFriend(friendId);
     this.loading.start();
-    this.updateTimeline(this.currentUser,friendId);
-    setTimeout(()=>{
+    this.updateTimeline(this.currentUser, friendId);
+    setTimeout(() => {
       this.loading.stop();
       toastr.info("Added new Friend!");
     }, 1000);
-    
+
 
 
   }
@@ -45,27 +45,27 @@ export class SearchComponent implements OnInit {
 
   updateTimeline(currentUser, friendId) {
     let obj = {};
-    this.af.database.list(`timeline/${friendId}`,{
-      query:{
-        orderByChild:'user_id',
-        equalTo:friendId
+    this.af.database.list(`timeline/${friendId}`, {
+      query: {
+        orderByChild: 'user_id',
+        equalTo: friendId
       }
     }).subscribe((posts) => {
       posts.forEach(element => {
-        obj[`timeline/${currentUser}/${element.$key}`] = { date: element.date, date_stamp: element.date_stamp, likes: {liked:false,value:element.likes.value}, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
+        obj[`timeline/${currentUser}/${element.$key}`] = { date: element.date, date_stamp: element.date_stamp, likes: { liked: false, value: element.likes.value }, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
       });
       this.af.database.object('/').update(obj);
     });
 
 
-     this.af.database.list(`timeline/${currentUser}`,{
-       query:{
-         orderByChild:'user_id',
-         equalTo:currentUser
-       }
-     }).subscribe((posts) => {
+    this.af.database.list(`timeline/${currentUser}`, {
+      query: {
+        orderByChild: 'user_id',
+        equalTo: currentUser
+      }
+    }).subscribe((posts) => {
       posts.forEach(element => {
-        obj[`timeline/${friendId}/${element.$key}`] = { date: element.date, date_stamp: element.date_stamp, likes: {liked:false,value:element.likes.value}, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
+        obj[`timeline/${friendId}/${element.$key}`] = { date: element.date, date_stamp: element.date_stamp, likes: { liked: false, value: element.likes.value }, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
       });
       this.af.database.object('/').update(obj);
     });

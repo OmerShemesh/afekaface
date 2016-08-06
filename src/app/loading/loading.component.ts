@@ -9,18 +9,18 @@ import { LoadingService } from './loading.service';
 })
 export class LoadingComponent implements OnInit {
 
-   public active: boolean;
+  public active: boolean;
 
-   constructor(private loading: LoadingService) {
-    
-    
+  constructor(private loading: LoadingService) {
+
+
   }
-  ngOnInit(){
-      this.loading.status.subscribe((status: boolean) => {
+  ngOnInit() {
+    this.loading.status.subscribe((status: boolean) => {
       this.active = status;
 
     });
-    }
+  }
 }
 
 
