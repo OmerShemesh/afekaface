@@ -54,9 +54,9 @@ export class SearchComponent implements OnInit {
       let obj = {};
       posts.forEach(element => {
         if (element.comments)
-          obj[`timeline/${currentUser}/${element.$key}`] = { comments: element.comments, date: element.date, date_stamp: element.date_stamp, likes: { liked: false, value: element.likes.value }, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
+          obj[`timeline/${currentUser}/${element.$key}`] = { comments: element.comments, date: element.date, date_stamp: element.date_stamp, likes: { liked: false, value: element.likes.value }, name: element.name,photos:element.photos, private: element.private, text: element.text, user_id: element.user_id };
         else
-          obj[`timeline/${currentUser}/${element.$key}`] = { date: element.date, date_stamp: element.date_stamp, likes: { liked: false, value: element.likes.value }, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
+          obj[`timeline/${currentUser}/${element.$key}`] = { date: element.date, date_stamp: element.date_stamp, likes: { liked: false, value: element.likes.value }, name: element.name,photos:element.photos, private: element.private, text: element.text, user_id: element.user_id };
 
       });
       this.af.database.object('/').update(obj);
