@@ -59,7 +59,6 @@ export class SearchComponent implements OnInit {
           obj[`timeline/${currentUser}/${element.$key}`] = { date: element.date, date_stamp: element.date_stamp, likes: { liked: false, value: element.likes.value }, name: element.name, private: element.private, text: element.text, user_id: element.user_id };
 
       });
-      console.log(posts);
       this.af.database.object('/').update(obj);
     });
 
