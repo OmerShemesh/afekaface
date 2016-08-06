@@ -4,7 +4,7 @@
         <div class="panel panel-white panel-shadow">
             <form #postForm="ngForm" class="form" (ngSubmit)="addPost()">
                 <div class="form-group">
-                    <textarea type="text" name="postText" [(ngModel)]="postText" class="form-control" placeholder="What's on your mind?" required></textarea>
+                    <textarea style="resize:none" type="text" name="postText" [(ngModel)]="postText" class="form-control" placeholder="What's on your mind?" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="photos">Photos</label>
@@ -72,6 +72,7 @@
                 </div>
                 <comment-list [comments]="post.comments" [post_id]="post.$key" [post_writer]="post.user_id"></comment-list>
             </div>
+            
         </div>
 
 
