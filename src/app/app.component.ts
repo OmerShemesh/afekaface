@@ -37,6 +37,7 @@ export class AppComponent implements OnInit  {
   logout()
   {
     this.auth.logout();
+    this.profile_pic = null;
     this.router.navigate(['/signup']);
   }
 
