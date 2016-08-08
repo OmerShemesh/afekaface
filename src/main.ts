@@ -17,10 +17,10 @@ if (environment.production) {
 bootstrap(AppComponent,[
   FIREBASE_PROVIDERS,
   defaultFirebase({
-     apiKey: "AIzaSyB-C5VqSu0RbLN02wLLfZ3cOJ5Nm3Y-eVw",
-    authDomain: "afekaface-e128c.firebaseapp.com",
-    databaseURL: "https://afekaface-e128c.firebaseio.com",
-    storageBucket: "afekaface-e128c.appspot.com",
+     apiKey: ",
+    authDomain: "",
+    databaseURL: "",
+    storageBucket: "",
   }),
   firebaseAuthConfig({
     provider:AuthProviders.Password,
